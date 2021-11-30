@@ -1,6 +1,6 @@
 ﻿using BluetoothCommon.Net;
 using BluetoothCommon.Net.interfaces;
-using Communications.UWP.Core.MsgPumps;
+using Communications.WinRT.MsgPumps;
 using CommunicationStack.Net.DataModels;
 using CommunicationStack.Net.Enumerations;
 using CommunicationStack.Net.interfaces;
@@ -38,14 +38,14 @@ namespace BluetoothRFCommUWP {
 
         #region Events
 
-        public event EventHandler<BTDeviceInfo> DiscoveredBTDevice;
-        public event EventHandler<BTDeviceInfo> BT_DeviceInfoGathered;
-        public event EventHandler<bool> DiscoveryComplete;
-        public event EventHandler<bool> ConnectionCompleted;
-        public event EventHandler<byte[]> MsgReceivedEvent;
-        public event EventHandler<BT_PairInfoRequest> BT_PairInfoRequested;
-        public event EventHandler<BTPairOperationStatus> BT_PairStatus;
-        public event EventHandler<BTUnPairOperationStatus> BT_UnPairStatus;
+        public event EventHandler<BTDeviceInfo>? DiscoveredBTDevice;
+        public event EventHandler<BTDeviceInfo>? BT_DeviceInfoGathered;
+        public event EventHandler<bool>? DiscoveryComplete;
+        public event EventHandler<bool>? ConnectionCompleted;
+        public event EventHandler<byte[]>? MsgReceivedEvent;
+        public event EventHandler<BT_PairInfoRequest>? BT_PairInfoRequested;
+        public event EventHandler<BTPairOperationStatus>? BT_PairStatus;
+        public event EventHandler<BTUnPairOperationStatus>? BT_UnPairStatus;
 
         #endregion
 
@@ -73,12 +73,11 @@ namespace BluetoothRFCommUWP {
                     this.log.Info("ConnectAsync", () => string.Format(
                         "Host:{0} Service:{1}", deviceDataModel.RemoteHostName, deviceDataModel.RemoteServiceName));
 
-                    this.msgPump.ConnectAsync(new SocketMsgPumpConnectData() {
-                        MaxReadBufferSize = READ_BUFF_MAX_SIZE,
-                        ProtectionLevel = SocketProtectionLevel.BluetoothEncryptionAllowNullAuthentication,
-                        RemoteHostName = deviceDataModel.RemoteHostName,
-                        ServiceName = deviceDataModel.RemoteServiceName,
-                    });
+                    this.msgPump.ConnectAsync(new SocketMsgPumpConnectData(
+                        deviceDataModel.RemoteHostName,
+                        deviceDataModel.RemoteServiceName,
+                        SocketProtectionLevel.BluetoothEncryptionAllowNullAuthentication,
+                        READ_BUFF_MAX_SIZE));
                 }
                 catch (Exception e) {
                     this.log.Exception(9999, "Connect Asyn Error", e);
@@ -115,7 +114,7 @@ namespace BluetoothRFCommUWP {
         #region Private tools
 
         /// <summary>Handle the msg pump connect result</summary>
-        private void MsgPump_ConnectResultEvent(object sender, MsgPumpResults results) {
+        private void MsgPump_ConnectResultEvent(object? sender, MsgPumpResults results) {
             // TODO - make more generic
             this.Connected = results.Code == MsgPumpResultCode.Connected;
             this.ConnectionCompleted?.Invoke(this, this.Connected);
@@ -123,7 +122,7 @@ namespace BluetoothRFCommUWP {
 
 
         /// <summary>Handle the msg pump incoming message</summary>
-        private void MsgPump_MsgReceivedEventHandler(object sender, byte[] e) {
+        private void MsgPump_MsgReceivedEventHandler(object? sender, byte[] e) {
             this.log.Info("BtWrapper_MsgReceivedEvent", () =>
                 string.Format("Received:{0}", e.ToFormatedByteString()));
             this.MsgReceivedEvent?.Invoke(sender, e);

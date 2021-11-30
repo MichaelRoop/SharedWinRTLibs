@@ -1,8 +1,8 @@
 ﻿using Common.Net.Network.Enumerations;
-using System;
+using LogUtils.Net;
 using Windows.Networking.Sockets;
 
-namespace Communications.UWP.Core.Extensions {
+namespace Communications.WinRT.Extensions {
 
     public static class SocketExtensions {
 
@@ -13,9 +13,14 @@ namespace Communications.UWP.Core.Extensions {
 
 
         public static SocketErrCode GetSocketCode(this Exception e) {
-            var baseEx = e.GetBaseException();
-            if (baseEx != null) {
-                return SocketError.GetStatus(baseEx.HResult).Convert();
+            try {
+                var baseEx = e.GetBaseException();
+                if (baseEx != null) {
+                    return SocketError.GetStatus(baseEx.HResult).Convert();
+                }
+            }
+            catch (Exception ex) {
+                Log.Exception(9999, "Bad Socket Exception", ex);
             }
             return SocketErrCode.Unknown;
         }

@@ -6,7 +6,7 @@ using LogUtils.Net;
 using VariousUtils.Net;
 using Windows.Storage.Streams;
 
-namespace Communications.UWP.Core.MsgPumps {
+namespace Communications.WinRT.MsgPumps {
 
     //https://stackoverflow.com/questions/44467220/uwp-serial-port-communication-for-character-write-and-read-uwp-and-arduino/44490311
 
@@ -15,12 +15,12 @@ namespace Communications.UWP.Core.MsgPumps {
         #region Data
 
         private ClassLog log = new ClassLog("SerialMsgPump");
-        private IInputStream inStream;
-        private IOutputStream outStream = null;
+        private IInputStream? inStream;
+        private IOutputStream? outStream;
 
-        private DataWriter writer = null;
-        private DataReader reader = null;
-        private CancellationTokenSource readCancelationToken = null;
+        private DataWriter? writer;
+        private DataReader? reader;
+        private CancellationTokenSource? readCancelationToken;
         private bool continueReading = false;
         private uint readBufferMaxSizer = 256;
         private ManualResetEvent readFinishedEvent = new ManualResetEvent(false);
@@ -77,11 +77,16 @@ namespace Communications.UWP.Core.MsgPumps {
             if (this.Connected) {
                 Task.Run(async () => {
                     try {
-                        this.log.Info("WriteAsync", () =>
-                            string.Format("Sent:{0}", msg.ToFormatedByteString()));
-                        this.writer.WriteBytes(msg);
-                        // returns 24 - number of bytes sent
-                        uint result = await this.writer.StoreAsync(); // This is if underlying is a stream
+                        if (this.writer != null) {
+                            this.log.Info("WriteAsync", () =>
+                                string.Format("Sent:{0}", msg.ToFormatedByteString()));
+                            this.writer.WriteBytes(msg);
+                            // returns 24 - number of bytes sent
+                            uint result = await this.writer.StoreAsync(); // This is if underlying is a stream
+                        }
+                        else {
+                            this.log.Error(9999, "writer null");
+                        }
                     }
                     catch (Exception e) {
                         this.log.Exception(9999, "", e);
@@ -104,13 +109,19 @@ namespace Communications.UWP.Core.MsgPumps {
 
                     while (this.continueReading) {
                         try {
-                            int count = (int)await this.reader.LoadAsync(
-                                this.readBufferMaxSizer).AsTask(this.readCancelationToken.Token);
-                            //this.log.Info("Launch Read Task", () => string.Format("Received:{0} bytes", count));
-                            if (count > 0) {
-                                byte[] tmpBuff = new byte[count];
-                                this.reader.ReadBytes(tmpBuff);
-                                this.HandlerMsgReceived(this, tmpBuff);
+                            if (this.reader != null && this.readCancelationToken != null) {
+                                int count = (int)await this.reader.LoadAsync(
+                                    this.readBufferMaxSizer).AsTask(this.readCancelationToken.Token);
+                                //this.log.Info("Launch Read Task", () => string.Format("Received:{0} bytes", count));
+                                if (count > 0) {
+                                    byte[] tmpBuff = new byte[count];
+                                    this.reader.ReadBytes(tmpBuff);
+                                    this.HandlerMsgReceived(this, tmpBuff);
+                                }
+                            }
+                            else {
+                                this.log.Error(9999, "Reader or token null");
+                                break;
                             }
                         }
                         catch (TaskCanceledException) {

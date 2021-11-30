@@ -10,6 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\SharedNetLibs\Common.Net\CommonNetwork.Net6.csproj" />
     <ProjectReference Include="..\..\SharedNetLibs\CommunicationStack.Net\CommunicationStack.Net6.csproj" />
+    <ProjectReference Include="..\..\SharedNetLibs\LogUtils.Net\LogUtils.Net6.csproj" />
   </ItemGroup>
 
 </Project>

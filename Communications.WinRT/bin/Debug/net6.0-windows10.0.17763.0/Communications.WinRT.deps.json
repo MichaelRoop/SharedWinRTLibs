@@ -10,6 +10,7 @@
         "dependencies": {
           "CommonNetwork.Net6": "1.0.0",
           "CommunicationStack.Net6": "1.0.0",
+          "LogUtils.Net6": "1.0.0",
           "runtimepack.Microsoft.Windows.SDK.NET.Ref": "10.0.17763.21"
         },
         "runtime": {

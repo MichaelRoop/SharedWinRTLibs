@@ -1,4 +1,4 @@
-﻿using Communications.UWP.Core.Extensions;
+﻿using Communications.WinRT.Extensions;
 using CommunicationStack.Net.DataModels;
 using CommunicationStack.Net.Enumerations;
 using CommunicationStack.Net.interfaces;
@@ -8,7 +8,7 @@ using Windows.Networking;
 using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
 
-namespace Communications.UWP.Core.MsgPumps {
+namespace Communications.WinRT.MsgPumps {
     public abstract class SocketMsgPumpBase : IMsgPump<SocketMsgPumpConnectData> {
 
         #region Data
@@ -17,9 +17,9 @@ namespace Communications.UWP.Core.MsgPumps {
         private static bool continueReading = false;
         private static bool isConnected = false;
 
-        private StreamSocket socket = null;
-        private DataReader reader = null;
-        private DataWriter writer = null;
+        private StreamSocket? socket = null;
+        private DataReader? reader = null;
+        private DataWriter? writer = null;
 
         #endregion
 
@@ -37,8 +37,8 @@ namespace Communications.UWP.Core.MsgPumps {
 
         #region Event Handlers 
 
-        public event EventHandler<MsgPumpResults> MsgPumpConnectResultEvent;
-        public event EventHandler<byte[]> MsgReceivedEvent;
+        public event EventHandler<MsgPumpResults>? MsgPumpConnectResultEvent;
+        public event EventHandler<byte[]>? MsgReceivedEvent;
 
         #endregion
 
@@ -138,7 +138,7 @@ namespace Communications.UWP.Core.MsgPumps {
         }
 
         public void WriteAsync(byte[] msg) {
-            if (this.Connected) {
+            if (this.Connected && this.writer != null) {
                 if (this.socket != null) {
                     Task.Run(async () => {
                         try {
@@ -172,7 +172,7 @@ namespace Communications.UWP.Core.MsgPumps {
 
         /// <summary>Derived returns static cancelation token to persiste in async methods</summary>
         /// <returns>The cancelation token</returns>
-        protected abstract CancellationTokenSource CancelToken { get; set; }
+        protected abstract CancellationTokenSource? CancelToken { get; set; }
 
         #endregion
 
@@ -185,14 +185,20 @@ namespace Communications.UWP.Core.MsgPumps {
                     this.ReadFinishEvent.Reset();
                     while (continueReading) {
                         try {
-                            int count = (int)await this.reader.LoadAsync(readBufferMaxSizer).AsTask(this.CancelToken.Token);
-                            if (count > 0) {
-                                this.log.Error(9, "received");
+                            if (this.reader != null && this.CancelToken != null) {
+                                int count = (int)await this.reader.LoadAsync(readBufferMaxSizer).AsTask(this.CancelToken.Token);
                                 if (count > 0) {
-                                    byte[] tmpBuff = new byte[count];
-                                    this.reader.ReadBytes(tmpBuff);
-                                    this.HandlerMsgReceived(this, tmpBuff);
+                                    this.log.Error(9, "received");
+                                    if (count > 0) {
+                                        byte[] tmpBuff = new byte[count];
+                                        this.reader.ReadBytes(tmpBuff);
+                                        this.HandlerMsgReceived(this, tmpBuff);
+                                    }
                                 }
+                            }
+                            else {
+                                this.log.Error(9999, "Writer null");
+                                break;
                             }
                         }
                         catch (TaskCanceledException) {

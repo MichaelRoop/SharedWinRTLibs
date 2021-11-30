@@ -1,6 +1,4 @@
-﻿using System.Threading;
-
-namespace Communications.UWP.Core.MsgPumps {
+﻿namespace Communications.WinRT.MsgPumps {
 
     /// <summary>
     /// Derived instance of SocketMsgPumpBase for Ethernet that passes its 
@@ -12,7 +10,7 @@ namespace Communications.UWP.Core.MsgPumps {
 
         #region static members
 
-        private static CancellationTokenSource CANCEL_TOKEN = null;
+        private static CancellationTokenSource CANCEL_TOKEN = new CancellationTokenSource(1);
         private static ManualResetEvent FINISH_READ_EVENT = new ManualResetEvent(false);
 
         #endregion
@@ -25,9 +23,9 @@ namespace Communications.UWP.Core.MsgPumps {
         }
 
 
-        protected override CancellationTokenSource CancelToken {
+        protected override CancellationTokenSource? CancelToken {
             get { return CANCEL_TOKEN; }
-            set { CANCEL_TOKEN = value; }
+            set { CANCEL_TOKEN = value ?? new CancellationTokenSource(1); }
         }
 
         #endregion

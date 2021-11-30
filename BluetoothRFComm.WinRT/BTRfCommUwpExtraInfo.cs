@@ -340,11 +340,8 @@ namespace BluetoothRFCommUWP {
                     this.log.Info("GetExtraInfo", () => string.Format("Advertisement Offload {0}", adapter.IsAdvertisementOffloadSupported));
                     this.log.Info("GetExtraInfo", () => string.Format("Central Role {0}", adapter.IsCentralRoleSupported));
                     this.log.Info("GetExtraInfo", () => string.Format("Classic {0}", adapter.IsClassicSupported));
-                    this.log.Info("GetExtraInfo", () => string.Format("Extended Advertisement {0}", adapter.IsExtendedAdvertisingSupported));
                     this.log.Info("GetExtraInfo", () => string.Format("Low Energy {0}", adapter.IsLowEnergySupported));
                     this.log.Info("GetExtraInfo", () => string.Format("Peripheral Role {0}", adapter.IsPeripheralRoleSupported));
-                    this.log.Info("GetExtraInfo", () => string.Format("Max advertisement length {0}", adapter.MaxAdvertisementDataLength));
-
                     Windows.Devices.Radios.Radio radio = await adapter.GetRadioAsync();
                     if (radio != null) {
                         //radio.Kind

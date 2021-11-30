@@ -12,17 +12,17 @@ using Windows.Networking;
 using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
 
-namespace Communications.UWP.Core.MsgPumps {
+namespace Communications.WinRT.MsgPumps {
 
     public class SocketMsgPump : IMsgPump<SocketMsgPumpConnectData> {
 
         #region Data
 
         private ClassLog log = new ClassLog("SocketMsgPump");
-        private StreamSocket socket = null;
-        private DataWriter writer = null;
-        private DataReader reader = null;
-        private CancellationTokenSource readCancelationToken = null;
+        private StreamSocket? socket = null;
+        private DataWriter? writer = null;
+        private DataReader? reader = null;
+        private CancellationTokenSource? readCancelationToken = null;
         private bool continueReading = false;
         private uint readBufferMaxSizer = 256;
         private ManualResetEvent readFinishedEvent = new ManualResetEvent(false);
@@ -37,8 +37,8 @@ namespace Communications.UWP.Core.MsgPumps {
 
         #region Events
 
-        public event EventHandler<MsgPumpResults> MsgPumpConnectResultEvent;
-        public event EventHandler<byte[]> MsgReceivedEvent;
+        public event EventHandler<MsgPumpResults>? MsgPumpConnectResultEvent;
+        public event EventHandler<byte[]>? MsgReceivedEvent;
 
         #endregion
 
@@ -98,7 +98,7 @@ namespace Communications.UWP.Core.MsgPumps {
 
         public void WriteAsync(byte[] msg) {
             if (this.Connected) {
-                if (this.socket != null) {
+                if (this.socket != null && this.writer != null) {
                     Task.Run(async () => {
                         try {
                             this.log.Info("WriteAsync", () =>
@@ -129,26 +129,29 @@ namespace Communications.UWP.Core.MsgPumps {
                 this.log.InfoEntry("DoReadTask +++");
                 this.readFinishedEvent.Reset();
 
-                while (this.continueReading) {
-                    try {
-                        int count = (int)await this.reader.LoadAsync(this.readBufferMaxSizer).AsTask(this.readCancelationToken.Token);
-
-                        this.log.Error(9, "received");
-                        
-                        if (count > 0) {
-                            byte[] tmpBuff = new byte[count];
-                            this.reader.ReadBytes(tmpBuff);
-                            this.HandlerMsgReceived(this, tmpBuff);
+                if (this.reader != null && this.readCancelationToken != null) {
+                    while (this.continueReading) {
+                        try {
+                            int count = (int)await this.reader.LoadAsync(this.readBufferMaxSizer).AsTask(this.readCancelationToken.Token);
+                            this.log.Error(9, "received");
+                            if (count > 0) {
+                                byte[] tmpBuff = new byte[count];
+                                this.reader.ReadBytes(tmpBuff);
+                                this.HandlerMsgReceived(this, tmpBuff);
+                            }
+                        }
+                        catch (TaskCanceledException) {
+                            this.log.Info("DoReadTask", "Cancelation");
+                            break;
+                        }
+                        catch (Exception e) {
+                            this.log.Exception(9999, "", e);
+                            break;
                         }
                     }
-                    catch (TaskCanceledException) {
-                        this.log.Info("DoReadTask", "Cancelation");
-                        break;
-                    }
-                    catch (Exception e) {
-                        this.log.Exception(9999, "", e);
-                        break;
-                    }
+                }
+                else {
+                    this.log.Error(9999, "Reader or token null");
                 }
                 this.log.InfoExit("DoReadTask ---");
                 this.readFinishedEvent.Set();

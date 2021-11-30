@@ -1,16 +1,25 @@
-﻿using CommunicationStack.Net.interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Windows.Networking.Sockets;
+﻿using Windows.Networking.Sockets;
 
-namespace Communications.UWP.Core.MsgPumps {
+namespace Communications.WinRT.MsgPumps {
 
     public class SocketMsgPumpConnectData {
         public string RemoteHostName { get; set; }
         public string ServiceName { get; set; }
         public SocketProtectionLevel ProtectionLevel { get; set; } = SocketProtectionLevel.PlainSocket;
         public uint MaxReadBufferSize { get; set; } = 256;
+
+
+        public SocketMsgPumpConnectData(
+            string host, 
+            string service, 
+            SocketProtectionLevel level, 
+            uint maxBuffSize) { 
+        
+            this.RemoteHostName = host;
+            this.ServiceName = service;
+            this.ProtectionLevel = level;
+            this.MaxReadBufferSize = maxBuffSize;
+        }
 
 
     }

@@ -1,6 +1,5 @@
-﻿using System.Threading;
-
-namespace Communications.UWP.Core.MsgPumps {
+﻿
+namespace Communications.WinRT.MsgPumps {
 
     /// <summary>
     /// Derived instance of SocketMsgPumpBase for Bluetooth that passes its 
@@ -25,9 +24,9 @@ namespace Communications.UWP.Core.MsgPumps {
         }
 
 
-        protected override CancellationTokenSource CancelToken {
+        protected override CancellationTokenSource? CancelToken {
             get { return CANCEL_TOKEN; }
-            set { CANCEL_TOKEN = value; }
+            set { CANCEL_TOKEN = value ?? new CancellationTokenSource(1); }
         }
 
         #endregion
