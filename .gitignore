@@ -5,3 +5,6 @@
 /.vs/SharedWinRTLibs/v17/.futdcache.v1
 /BluetoothLE.WinRT/obj/*
 /BluetoothLE.WinRT/bin/Debug/*
+/Wifi.WinRT/obj/Debug/*
+/Wifi.WinRT/obj/*
+/Wifi.WinRT/bin/*

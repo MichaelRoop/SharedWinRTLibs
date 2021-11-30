@@ -23,6 +23,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BluetoothLE.WinRT", "Blueto
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BluetoothLE.Net6", "..\SharedNetLibs\BluetoothLE\BluetoothLE.Net6.csproj", "{4CA22E28-0F08-441A-A000-1216295C4C55}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wifi.WinRT", "Wifi.WinRT\Wifi.WinRT.csproj", "{CAFE8FA4-5C77-496C-9766-DDD7D43F9BC7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WifiCommon.Net6", "..\SharedNetLibs\WifiCommon.Net\WifiCommon.Net6.csproj", "{4924EDEE-FCBB-4376-A366-27AC3B7EC45E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +73,14 @@ Global
 		{4CA22E28-0F08-441A-A000-1216295C4C55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4CA22E28-0F08-441A-A000-1216295C4C55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4CA22E28-0F08-441A-A000-1216295C4C55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAFE8FA4-5C77-496C-9766-DDD7D43F9BC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAFE8FA4-5C77-496C-9766-DDD7D43F9BC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAFE8FA4-5C77-496C-9766-DDD7D43F9BC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAFE8FA4-5C77-496C-9766-DDD7D43F9BC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4924EDEE-FCBB-4376-A366-27AC3B7EC45E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4924EDEE-FCBB-4376-A366-27AC3B7EC45E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4924EDEE-FCBB-4376-A366-27AC3B7EC45E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4924EDEE-FCBB-4376-A366-27AC3B7EC45E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
