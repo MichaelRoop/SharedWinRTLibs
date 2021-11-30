@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BluetoothCommon.WinRT", "BluetoothCommon.WinRT\BluetoothCommon.WinRT.csproj", "{AF37A3CA-A8D9-4620-B956-7979E15073C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BluetoothCommon.WinRT", "BluetoothCommon.WinRT\BluetoothCommon.WinRT.csproj", "{AF37A3CA-A8D9-4620-B956-7979E15073C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BluetoothRFComm.WinRT", "BluetoothRFComm.WinRT\BluetoothRFComm.WinRT.csproj", "{CFFC161B-CC59-4430-9BBB-5C8AF9B79868}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BluetoothRFComm.WinRT", "BluetoothRFComm.WinRT\BluetoothRFComm.WinRT.csproj", "{CFFC161B-CC59-4430-9BBB-5C8AF9B79868}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BluetoothCommon.Net6", "..\SharedNetLibs\BluetoothCommon.Net\BluetoothCommon.Net6.csproj", "{4D4B659D-0B4B-487B-AD24-310908ACEC74}"
 EndProject
@@ -15,9 +15,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonNetwork.Net6", "..\Sh
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogUtils.Net6", "..\SharedNetLibs\LogUtils.Net\LogUtils.Net6.csproj", "{83103AD5-E38D-4988-93C7-CBDCD6C4254B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Communications.WinRT", "Communications.WinRT\Communications.WinRT.csproj", "{3C557F42-8B27-4E71-9F19-61E173EAD505}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Communications.WinRT", "Communications.WinRT\Communications.WinRT.csproj", "{3C557F42-8B27-4E71-9F19-61E173EAD505}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommunicationStack.Net6", "..\SharedNetLibs\CommunicationStack.Net\CommunicationStack.Net6.csproj", "{C028415B-AC71-44FC-93C5-C8A19AD3186E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BluetoothLE.WinRT", "BluetoothLE.WinRT\BluetoothLE.WinRT.csproj", "{73B1049B-EC13-4E95-9883-7FAB7A1B0638}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BluetoothLE.Net6", "..\SharedNetLibs\BluetoothLE\BluetoothLE.Net6.csproj", "{4CA22E28-0F08-441A-A000-1216295C4C55}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +61,14 @@ Global
 		{C028415B-AC71-44FC-93C5-C8A19AD3186E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C028415B-AC71-44FC-93C5-C8A19AD3186E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C028415B-AC71-44FC-93C5-C8A19AD3186E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73B1049B-EC13-4E95-9883-7FAB7A1B0638}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73B1049B-EC13-4E95-9883-7FAB7A1B0638}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73B1049B-EC13-4E95-9883-7FAB7A1B0638}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73B1049B-EC13-4E95-9883-7FAB7A1B0638}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CA22E28-0F08-441A-A000-1216295C4C55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CA22E28-0F08-441A-A000-1216295C4C55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CA22E28-0F08-441A-A000-1216295C4C55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CA22E28-0F08-441A-A000-1216295C4C55}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
