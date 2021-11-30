@@ -27,6 +27,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wifi.WinRT", "Wifi.WinRT\Wi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WifiCommon.Net6", "..\SharedNetLibs\WifiCommon.Net\WifiCommon.Net6.csproj", "{4924EDEE-FCBB-4376-A366-27AC3B7EC45E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serial.WinRT", "Serial.WinRT\Serial.WinRT.csproj", "{94A56E31-251D-4DBD-BFF2-E7C85F20B39A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SerialCommon.Net6", "..\SharedNetLibs\SerialCommon.Net\SerialCommon.Net6.csproj", "{01E2C19D-AE9F-419F-B82D-ABC2351DFEB7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StorageFactory.Net6", "..\SharedNetLibs\StorageFactory.Net\StorageFactory.Net6.csproj", "{E032B628-F575-460D-8D41-2AA14A1CE3A7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +87,18 @@ Global
 		{4924EDEE-FCBB-4376-A366-27AC3B7EC45E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4924EDEE-FCBB-4376-A366-27AC3B7EC45E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4924EDEE-FCBB-4376-A366-27AC3B7EC45E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94A56E31-251D-4DBD-BFF2-E7C85F20B39A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94A56E31-251D-4DBD-BFF2-E7C85F20B39A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94A56E31-251D-4DBD-BFF2-E7C85F20B39A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94A56E31-251D-4DBD-BFF2-E7C85F20B39A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01E2C19D-AE9F-419F-B82D-ABC2351DFEB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01E2C19D-AE9F-419F-B82D-ABC2351DFEB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01E2C19D-AE9F-419F-B82D-ABC2351DFEB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01E2C19D-AE9F-419F-B82D-ABC2351DFEB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E032B628-F575-460D-8D41-2AA14A1CE3A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E032B628-F575-460D-8D41-2AA14A1CE3A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E032B628-F575-460D-8D41-2AA14A1CE3A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E032B628-F575-460D-8D41-2AA14A1CE3A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
