@@ -1,3 +1,5 @@
 /BluetoothRFComm.WinRT/obj/*
 /Communications.WinRT/obj/*
 /BluetoothRFComm.WinRT/bin/*
+/.vs/SharedWinRTLibs/DesignTimeBuild/.dtbcache.v2
+/.vs/SharedWinRTLibs/v17/.futdcache.v1

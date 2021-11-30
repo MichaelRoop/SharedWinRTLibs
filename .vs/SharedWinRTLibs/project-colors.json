@@ -1,0 +1,51 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "c28eb7e5-562d-4d82-8b16-6181b678569f": {
+      "ProjectGuid": "c28eb7e5-562d-4d82-8b16-6181b678569f",
+      "DisplayName": "SharedWinRTLibs",
+      "ColorIndex": 0
+    },
+    "af37a3ca-a8d9-4620-b956-7979e15073c1": {
+      "ProjectGuid": "af37a3ca-a8d9-4620-b956-7979e15073c1",
+      "DisplayName": "BluetoothCommon.WinRT",
+      "ColorIndex": 1
+    },
+    "2bbdb7f5-73d8-4da8-9b7f-71986b8bbd81": {
+      "ProjectGuid": "2bbdb7f5-73d8-4da8-9b7f-71986b8bbd81",
+      "DisplayName": "BluetoothRFComm.WinRT",
+      "ColorIndex": 2
+    },
+    "cffc161b-cc59-4430-9bbb-5c8af9b79868": {
+      "ProjectGuid": "cffc161b-cc59-4430-9bbb-5c8af9b79868",
+      "DisplayName": "BluetoothRFComm.WinRT",
+      "ColorIndex": 3
+    },
+    "e881dfec-c66c-4fbd-b7da-d65c164955e2": {
+      "ProjectGuid": "e881dfec-c66c-4fbd-b7da-d65c164955e2",
+      "DisplayName": "CommonNetwork.Net6",
+      "ColorIndex": 4
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    },
+    "3c557f42-8b27-4e71-9f19-61e173ead505": {
+      "ProjectGuid": "3c557f42-8b27-4e71-9f19-61e173ead505",
+      "DisplayName": "Communications.WinRT",
+      "ColorIndex": 5
+    },
+    "c028415b-ac71-44fc-93c5-c8a19ad3186e": {
+      "ProjectGuid": "c028415b-ac71-44fc-93c5-c8a19ad3186e",
+      "DisplayName": "CommunicationStack.Net6",
+      "ColorIndex": 6
+    },
+    "4d4b659d-0b4b-487b-ad24-310908acec74": {
+      "ProjectGuid": "4d4b659d-0b4b-487b-ad24-310908acec74",
+      "DisplayName": "BluetoothCommon.Net6",
+      "ColorIndex": 7
+    }
+  },
+  "NextColorIndex": 8
+}
