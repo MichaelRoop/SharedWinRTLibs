@@ -1,12 +1,8 @@
 ﻿using Common.Net.Network;
-using MultiCommData.Net.UserDisplayData;
 using SerialCommon.Net.DataModels;
-using SerialCommon.Net.Enumerations;
 using SerialCommon.Net.interfaces;
-using System;
-using System.Collections.Generic;
+using SerialCommon.Net6.DataModels;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using Windows.Devices.Enumeration;
 using Windows.Devices.SerialCommunication;
 using Windows.Devices.Usb;
@@ -143,7 +139,7 @@ namespace Serial.UWP.Core {
                 catch (Exception e) {
                     this.log.Exception(1111, "", e);
                     // TODO Add fields
-                    this.OnError.Invoke(this, new SerialUsbError());
+                    this.OnError?.Invoke(this, new SerialUsbError());
                 }
             });
         }
@@ -162,7 +158,10 @@ namespace Serial.UWP.Core {
             this.log.Info("DoDiscovery", () => string.Format("   {0}", "Properties -------------"));
             foreach (var p in info.Properties) {
                 string key = p.Key == null ? "''" : p.Key;
-                string value = p.Value == null ? "''" : p.Value.ToString();
+                string? value = p.Value == null ? "''" : p.Value.ToString();
+                if (value is null) {
+                    value = "''";
+                }
                 this.log.Info("DoDiscovery", () => string.Format("       {0} : {1}", key, value));
             }
         }

@@ -10,9 +10,10 @@ using Windows.Devices.Bluetooth.Rfcomm;
 using Windows.Devices.Enumeration;
 using Windows.Devices.Radios;
 
-namespace BluetoothRFCommUWP {
+namespace BluetoothRfComm.UWP.Core {
 
-    public partial class BTRfCommUwp : IBTInterface {
+    /// <summary>Extra info portion of RFComm implementation: BluetoothRfCommImpl_GetExtraInfo</summary>
+    public partial class BluetoothRfCommUwpCore : IBTInterface {
 
         /// <summary>Complete by connecting and filling in the device information</summary>
         /// <param name="device"></param>
@@ -158,7 +159,10 @@ namespace BluetoothRFCommUWP {
             this.log.Info("GetDeviceInfo", () => string.Format("Properties count {0}", dict.Count));
             foreach (var p in dict) {
                 string key = p.Key == null ? "" : p.Key;
-                string value = p.Value == null ? "NA" : p.Value.ToString();
+                string? value = p.Value == null ? "NA" : p.Value.ToString();
+                if (value is null) {
+                    value = "NA";
+                }
                 this.log.Info("GetDeviceInfo", () => string.Format("{0} - {1}", key, value));
             }
         }
@@ -340,8 +344,11 @@ namespace BluetoothRFCommUWP {
                     this.log.Info("GetExtraInfo", () => string.Format("Advertisement Offload {0}", adapter.IsAdvertisementOffloadSupported));
                     this.log.Info("GetExtraInfo", () => string.Format("Central Role {0}", adapter.IsCentralRoleSupported));
                     this.log.Info("GetExtraInfo", () => string.Format("Classic {0}", adapter.IsClassicSupported));
+                    //this.log.Info("GetExtraInfo", () => string.Format("Extended Advertisement {0}", adapter.IsExtendedAdvertisingSupported));
                     this.log.Info("GetExtraInfo", () => string.Format("Low Energy {0}", adapter.IsLowEnergySupported));
                     this.log.Info("GetExtraInfo", () => string.Format("Peripheral Role {0}", adapter.IsPeripheralRoleSupported));
+                    //this.log.Info("GetExtraInfo", () => string.Format("Max advertisement length {0}", adapter.MaxAdvertisementDataLength));
+
                     Windows.Devices.Radios.Radio radio = await adapter.GetRadioAsync();
                     if (radio != null) {
                         //radio.Kind

@@ -12,9 +12,9 @@ namespace Serial.UWP.Core {
 
     public partial class SerialImplUwp : ISerialInterface {
 
-        public event EventHandler<List<SerialDeviceInfo>> DiscoveredDevices;
-        public event EventHandler<SerialUsbError> OnError;
-        public event EventHandler<MsgPumpResults> OnSerialConnectionAttemptCompleted;
+        public event EventHandler<List<SerialDeviceInfo>>? DiscoveredDevices;
+        public event EventHandler<SerialUsbError>? OnError;
+        public event EventHandler<MsgPumpResults>? OnSerialConnectionAttemptCompleted;
 
 
         #region ICommStack Implementations
@@ -22,7 +22,7 @@ namespace Serial.UWP.Core {
         /// <summary>
         /// 
         /// </summary>
-        public event EventHandler<byte[]> MsgReceivedEvent;
+        public event EventHandler<byte[]>? MsgReceivedEvent;
 
 
         public bool SendOutMsg(byte[] msg) {
@@ -51,14 +51,14 @@ namespace Serial.UWP.Core {
 
         #region Event handlers
 
-        private void MsgPump_MsgReceivedEventHandler(object sender, byte[] e) {
+        private void MsgPump_MsgReceivedEventHandler(object? sender, byte[] e) {
             this.log.Info("MsgPump_MsgReceivedEventHandler", () =>
                 string.Format("Received:{0}", e.ToFormatedByteString()));
             this.MsgReceivedEvent?.Invoke(sender, e);
         }
 
 
-        private void MsgPump_ConnectResultEventHandler(object sender, MsgPumpResults e) {
+        private void MsgPump_ConnectResultEventHandler(object? sender, MsgPumpResults e) {
             switch (e.Code) {
                 case MsgPumpResultCode.Connected:
                 case MsgPumpResultCode.ConnectionFailure:

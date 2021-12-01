@@ -5,10 +5,12 @@ using System;
 using System.Threading.Tasks;
 using Windows.Devices.Bluetooth;
 using Windows.Devices.Enumeration;
+using Windows.Devices.Radios;
 
-namespace BluetoothRFCommUWP {
+namespace BluetoothRfComm.UWP.Core {
 
-    public partial class BTRfCommUwp : IBTInterface {
+    /// <summary>Discovery portion of implementation class : BluetoothRfCommImpl_Discovery </summary>
+    public partial class BluetoothRfCommUwpCore : IBTInterface {
 
         public void DiscoverDevicesAsync(bool paired) {
             try {
@@ -94,7 +96,11 @@ namespace BluetoothRFCommUWP {
                 this.DiscoveryComplete?.Invoke(this, false);
             }
         }
+
+
+
     }
+
 
 
 }

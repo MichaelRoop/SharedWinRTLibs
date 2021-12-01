@@ -1,16 +1,18 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
 	  <TargetFramework>net6.0-windows10.0.17763.0</TargetFramework>
 	  <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
-    <ImplicitUsings>enable</ImplicitUsings>
+	  <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SharedNetLibs\BluetoothCommon.Net\BluetoothCommon.Net6.csproj" />
     <ProjectReference Include="..\..\SharedNetLibs\Common.Net\CommonNetwork.Net6.csproj" />
+    <ProjectReference Include="..\..\SharedNetLibs\CommunicationStack.Net\CommunicationStack.Net6.csproj" />
+    <ProjectReference Include="..\..\SharedNetLibs\Ethernet.Common.Net\Ethernet.Common.Net6.csproj" />
     <ProjectReference Include="..\..\SharedNetLibs\LogUtils.Net\LogUtils.Net6.csproj" />
+    <ProjectReference Include="..\Communications.WinRT\Communications.WinRT.csproj" />
   </ItemGroup>
 
 </Project>

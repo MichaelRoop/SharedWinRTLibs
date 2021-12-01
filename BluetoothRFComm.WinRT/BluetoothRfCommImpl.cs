@@ -1,4 +1,6 @@
-﻿using BluetoothCommon.Net;
+﻿#define USE_BT_WRAPPER
+
+using BluetoothCommon.Net;
 using BluetoothCommon.Net.interfaces;
 using Communications.WinRT.MsgPumps;
 using CommunicationStack.Net.DataModels;
@@ -11,16 +13,38 @@ using System.Threading.Tasks;
 using VariousUtils.Net;
 using Windows.Networking.Sockets;
 
-namespace BluetoothRFCommUWP {
+namespace BluetoothRfComm.UWP.Core {
 
-    // To Use UWP libs just include NuGet package Microsoft.Windows.SDK.Contracts(nn.n.nnnn.n)
+    #region OLD DATA NOT SURE IF IT APPLIES - SEE BELOW
+    // STEPS TO USE UWP libs in Win32
+    // Windows.Foundation.UniversalApiContract
+    // C:\Program Files(x86)\Windows Kits\10\References\10.0.18362.0\Windows.Foundation.UniversalApiContract\8.0.0.0\Windows.Foundation.UniversalApiContract.winmd
+
+    //Windows.Foundation.FoundationContract
+    //C:\Program Files (x86)\Windows Kits\10\References\10.0.18362.0\Windows.Foundation.FoundationContract\3.0.0.0\Windows.Foundation.FoundationContract.winmd
+
+    //Windows
+    //C:\Program Files (x86)\Windows Kits\10\UnionMetadata\10.0.18362.0\Facade\windows.winmd
+
+    //System.Runtime.WindowsRuntime
+    //C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETCore\v4.5\System.Runtime.WindowsRuntime.dll
+
+    //System.Runtime.InteropServices.WindowsRuntime
+    //C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\Facades\System.Runtime.InteropServices.WindowsRuntime.dll
+
+    // Add to manifest
+    //https://stackoverflow.com/questions/38845320/uwp-serialdevice-fromidasync-throws-element-not-found-exception-from-hresult
+    #endregion
+
+    // *** UPDATE: Looks like you only have to add the NuGet package:
+    // Microsoft.Windows.SDK.Contracts(nn.n.nnnn.n)
     //Not sure if you need to add to manifest. If so, would only be in main App
 
-    public partial class BTRfCommUwp : IBTInterface {
+    public partial class BluetoothRfCommUwpCore : IBTInterface {
 
         #region Data
 
-        private ClassLog log = new ClassLog("BTRfCommUwp");
+        private ClassLog log = new ClassLog("BluetoothRfCommImpl");
         private readonly string KEY_CAN_PAIR = "System.Devices.Aep.CanPair";
         private readonly string KEY_IS_PAIRED = "System.Devices.Aep.IsPaired";
         //private readonly string KEY_CONTAINER_ID = "System.Devices.Aep.ContainerId";
@@ -51,7 +75,7 @@ namespace BluetoothRFCommUWP {
 
         #region Constructors
 
-        public BTRfCommUwp() {
+        public BluetoothRfCommUwpCore() {
             this.msgPump.MsgPumpConnectResultEvent += this.MsgPump_ConnectResultEvent;
             this.msgPump.MsgReceivedEvent += this.MsgPump_MsgReceivedEventHandler;
         }

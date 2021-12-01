@@ -1,4 +1,4 @@
-﻿using Communications.UWP.Core.MsgPumps;
+﻿using Communications.WinRT.MsgPumps;
 using CommunicationStack.Net.interfaces;
 using SerialCommon.Net.DataModels;
 using SerialCommon.Net.Enumerations;
@@ -12,7 +12,7 @@ namespace Serial.UWP.Core {
 
     public partial class SerialImplUwp : ISerialInterface {
 
-        SerialDevice device = null;
+        SerialDevice? device = null;
         IMsgPump<SerialMsgPumpConnectData> msgPump = new SerialMsgPump();
 
         private void DoDisconnect() {
@@ -48,12 +48,8 @@ namespace Serial.UWP.Core {
                             this.device.ReadTimeout = TimeSpan.FromMilliseconds(5);
                             this.device.WriteTimeout = TimeSpan.FromMilliseconds(5);
 
-
-                            this.msgPump.ConnectAsync(new SerialMsgPumpConnectData() {
-                                InStream = this.device.InputStream,
-                                OutStream = this.device.OutputStream,
-                                MaxReadBufferSize = 255,
-                            });
+                            this.msgPump.ConnectAsync(new SerialMsgPumpConnectData(
+                                this.device.InputStream, this.device.OutputStream, 255));
                             this.Connected = true;
                         }
                         else {

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using Windows.Devices.Bluetooth;
 using Windows.Devices.Enumeration;
 
-namespace BluetoothRFCommUWP {
+namespace BluetoothRfComm.UWP.Core {
 
-    public partial class BTRfCommUwp : IBTInterface {
+    public partial class BluetoothRfCommUwpCore : IBTInterface {
 
 
         public void UnPairAsync(BTDeviceInfo info) {
@@ -165,7 +165,7 @@ namespace BluetoothRFCommUWP {
                     });
                 }
             }
-            catch(Exception e) {
+            catch(Exception) {
                 WrapErr.SafeAction(()=>{
                     this.BT_UnPairStatus?.Invoke(this, new BTUnPairOperationStatus() {
                         Name = info.Name,

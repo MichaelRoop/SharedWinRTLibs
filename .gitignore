@@ -10,3 +10,9 @@
 /Wifi.WinRT/bin/*
 /Serial.WinRT/obj/Debug/*
 /Serial.WinRT/obj/*
+/Communications.WinRT/bin/*
+/Communications.WinRT/bin/*
+/Ethernet.WinRT/bin/*
+/Ethernet.WinRT/obj/*
+/Serial.WinRT/bin/*
+/BluetoothCommon.WinRT/bin/*
