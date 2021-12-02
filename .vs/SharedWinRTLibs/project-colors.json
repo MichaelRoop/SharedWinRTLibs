@@ -45,7 +45,42 @@
       "ProjectGuid": "4d4b659d-0b4b-487b-ad24-310908acec74",
       "DisplayName": "BluetoothCommon.Net6",
       "ColorIndex": 7
+    },
+    "73b1049b-ec13-4e95-9883-7fab7a1b0638": {
+      "ProjectGuid": "73b1049b-ec13-4e95-9883-7fab7a1b0638",
+      "DisplayName": "BluetoothLE.WinRT",
+      "ColorIndex": 8
+    },
+    "4ca22e28-0f08-441a-a000-1216295c4c55": {
+      "ProjectGuid": "4ca22e28-0f08-441a-a000-1216295c4c55",
+      "DisplayName": "BluetoothLE.Net6",
+      "ColorIndex": 9
+    },
+    "cafe8fa4-5c77-496c-9766-ddd7d43f9bc7": {
+      "ProjectGuid": "cafe8fa4-5c77-496c-9766-ddd7d43f9bc7",
+      "DisplayName": "Wifi.WinRT",
+      "ColorIndex": 10
+    },
+    "94a56e31-251d-4dbd-bff2-e7c85f20b39a": {
+      "ProjectGuid": "94a56e31-251d-4dbd-bff2-e7c85f20b39a",
+      "DisplayName": "Serial.WinRT",
+      "ColorIndex": 11
+    },
+    "01e2c19d-ae9f-419f-b82d-abc2351dfeb7": {
+      "ProjectGuid": "01e2c19d-ae9f-419f-b82d-abc2351dfeb7",
+      "DisplayName": "SerialCommon.Net6",
+      "ColorIndex": 12
+    },
+    "e032b628-f575-460d-8d41-2aa14a1ce3a7": {
+      "ProjectGuid": "e032b628-f575-460d-8d41-2aa14a1ce3a7",
+      "DisplayName": "StorageFactory.Net6",
+      "ColorIndex": 13
+    },
+    "ac885c0f-fa6f-4064-9ae0-3553fa3f3b12": {
+      "ProjectGuid": "ac885c0f-fa6f-4064-9ae0-3553fa3f3b12",
+      "DisplayName": "Ethernet.WinRT",
+      "ColorIndex": 14
     }
   },
-  "NextColorIndex": 8
+  "NextColorIndex": 15
 }

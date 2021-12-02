@@ -8,9 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SharedNetLibs\BluetoothCommon.Net\BluetoothCommon.Net6.csproj" />
-    <ProjectReference Include="..\..\SharedNetLibs\ChkUtils.Net\ChkUtils.Net6.csproj" />
-    <ProjectReference Include="..\..\SharedNetLibs\LogUtils.Net\LogUtils.Net6.csproj" />
+    <ProjectReference Include="..\..\SharedNetLibs\BluetoothCommon.Net\BluetoothCommon.Net.csproj" />
+    <ProjectReference Include="..\..\SharedNetLibs\ChkUtils.Net\ChkUtils.Net.csproj" />
+    <ProjectReference Include="..\..\SharedNetLibs\LogUtils.Net\LogUtils.Net.csproj" />
     <ProjectReference Include="..\BluetoothCommon.WinRT\BluetoothCommon.WinRT.csproj" />
     <ProjectReference Include="..\Communications.WinRT\Communications.WinRT.csproj" />
   </ItemGroup>

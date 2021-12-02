@@ -187,7 +187,7 @@ namespace Bluetooth.UWP.Core {
 
 
         private void DebugDumpDeviceInfo(DeviceInformation device) {
-            if (device != null) {
+            if (device is not null) {
                 this.log.Error(9999, "Null device");
                 this.log.Info("Dump", () => string.Format("     Name: {0}", device.Name));
                 this.log.Info("Dump", () => string.Format("       Id: {0}", device.Id));
@@ -216,7 +216,7 @@ namespace Bluetooth.UWP.Core {
                     this.log.Error(9999, "EnclosureLocation: null");
                 }
 
-                if (device.Pairing != null) {
+                if (device != null && device.Pairing != null) {
                     this.log.Info("Dump", () => string.Format("PAIRING"));
                     this.log.Info("Dump", () => string.Format("    CanPair: {0}", device.Pairing.CanPair));
                     this.log.Info("Dump", () => string.Format("   IsPaired: {0}", device.Pairing.IsPaired));
