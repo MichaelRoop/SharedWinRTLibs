@@ -16,3 +16,4 @@
 /Ethernet.WinRT/obj/*
 /Serial.WinRT/bin/*
 /BluetoothCommon.WinRT/bin/*
+/.vs/SharedWinRTLibs/v17/TestStore/*

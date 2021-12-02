@@ -80,7 +80,32 @@
       "ProjectGuid": "ac885c0f-fa6f-4064-9ae0-3553fa3f3b12",
       "DisplayName": "Ethernet.WinRT",
       "ColorIndex": 14
+    },
+    "372a9f81-d70d-4761-afb9-b9b83610f97d": {
+      "ProjectGuid": "372a9f81-d70d-4761-afb9-b9b83610f97d",
+      "DisplayName": "Common.Net",
+      "ColorIndex": 15
+    },
+    "4924edee-fcbb-4376-a366-27ac3b7ec45e": {
+      "ProjectGuid": "4924edee-fcbb-4376-a366-27ac3b7ec45e",
+      "DisplayName": "WifiCommon.Net6",
+      "ColorIndex": 0
+    },
+    "83103ad5-e38d-4988-93c7-cbdcd6c4254b": {
+      "ProjectGuid": "83103ad5-e38d-4988-93c7-cbdcd6c4254b",
+      "DisplayName": "LogUtils.Net6",
+      "ColorIndex": 1
+    },
+    "d583327a-e677-4d7a-8245-26c11c9a59e7": {
+      "ProjectGuid": "d583327a-e677-4d7a-8245-26c11c9a59e7",
+      "DisplayName": "ChkUtils.Net",
+      "ColorIndex": 2
+    },
+    "da4d9a94-68a8-4bdc-8981-60de57a45854": {
+      "ProjectGuid": "da4d9a94-68a8-4bdc-8981-60de57a45854",
+      "DisplayName": "BluetoothLE.Net",
+      "ColorIndex": 3
     }
   },
-  "NextColorIndex": 15
+  "NextColorIndex": 4
 }
