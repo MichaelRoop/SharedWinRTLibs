@@ -2,6 +2,7 @@
 using BluetoothLE.Net.Enumerations;
 using BluetoothLE.Net.interfaces;
 using BluetoothLE.Net.Parsers;
+using ChkUtils.Net;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -36,6 +37,7 @@ namespace Bluetooth.UWP.Core {
             try {
                 this.log.Info("BuildServiceDataModel", () => string.Format("Gatt Service:{0}  Uid:{1}",
                    BLE_DisplayHelpers.GetServiceName(service), service.Uuid.ToString()));
+                WrapErr.ChkVar(status.DeviceInfo, 9999, "Null device info");
 
                 // New service data model to add to device info
                 BLE_ServiceDataModel serviceDataModel = new BLE_ServiceDataModel() {
