@@ -3,9 +3,6 @@ using BluetoothLE.Net.Enumerations;
 using BluetoothLE.Net.interfaces;
 using BluetoothLE.Net.Parsers;
 using ChkUtils.Net;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Windows.Devices.Bluetooth.GenericAttributeProfile;
 
 
@@ -40,7 +37,7 @@ namespace Bluetooth.UWP.Core {
                 WrapErr.ChkVar(status.DeviceInfo, 9999, "Null device info");
 
                 // New service data model to add to device info
-                BLE_ServiceDataModel serviceDataModel = new BLE_ServiceDataModel() {
+                BLE_ServiceDataModel serviceDataModel = new() {
                     Characteristics = new List<BLE_CharacteristicDataModel>(),
                     AttributeHandle = service.AttributeHandle,
                     DeviceId = status.DeviceInfo.Id,
@@ -94,7 +91,9 @@ namespace Bluetooth.UWP.Core {
         /// <summary>Populate the portable session data model with Win objects</summary>
         /// <param name="session">The Windows GATT session</param>
         /// <param name="dataModel">The portable data model</param>
+#pragma warning disable CA1822 // Mark members as static
         private void BuildSessionDataModel(GattSession session, BLE_GattSession dataModel) {
+#pragma warning restore CA1822 // Mark members as static
             if (session != null) {
                 dataModel.CanConnectionBeMaintained = session.CanMaintainConnection;
                 dataModel.ShouldConnectionBeMaintained = session.MaintainConnection;

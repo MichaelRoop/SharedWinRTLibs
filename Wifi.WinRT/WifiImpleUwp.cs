@@ -12,8 +12,8 @@ namespace Wifi.UWP.Core {
 
         #region Data
 
-        ClassLog log = new ClassLog("WifiImpleUwp");
-        private static IMsgPump<SocketMsgPumpConnectData> msgPump = new SocketMsgPumpWifi();
+        private readonly ClassLog log = new("WifiImpleUwp");
+        private readonly static IMsgPump<SocketMsgPumpConnectData> msgPump = new SocketMsgPumpWifi();
 
         #endregion
 
@@ -63,7 +63,7 @@ namespace Wifi.UWP.Core {
 
         #region IWifiInterface events
 
-        public event EventHandler<List<WifiAdapterInfo>>? DiscoveredAdapters;
+        //public event EventHandler<List<WifiAdapterInfo>>? DiscoveredAdapters;
 
 
         public event EventHandler<List<WifiNetworkInfo>>? DiscoveredNetworks;
@@ -75,7 +75,7 @@ namespace Wifi.UWP.Core {
         public event EventHandler<MsgPumpResults>? OnWifiConnectionAttemptCompleted;
 
 
-        public event EventHandler<WifiCredentials>? CredentialsRequestedEvent;
+        //public event EventHandler<WifiCredentials>? CredentialsRequestedEvent;
 
 
         #endregion
@@ -92,30 +92,30 @@ namespace Wifi.UWP.Core {
         }
 
 
-        private Task DisconnectAsync() {
-            return Task.Run(() => {
-                try {
-                    this.log.InfoEntry("DisconnectAsync");
-                    if (msgPump.Connected) {
+        //private Task DisconnectAsync() {
+        //    return Task.Run(() => {
+        //        try {
+        //            this.log.InfoEntry("DisconnectAsync");
+        //            if (msgPump.Connected) {
 
-                        this.log.Info("DisconnectAsync", "Disconnecting pump");
-                        msgPump.Disconnect();
-                        this.log.Info("DisconnectAsync", "Finish disconnecting pump");
-                    }
+        //                this.log.Info("DisconnectAsync", "Disconnecting pump");
+        //                msgPump.Disconnect();
+        //                this.log.Info("DisconnectAsync", "Finish disconnecting pump");
+        //            }
 
-                    // TODO Arduino has problems if we close the adapter
-                    // Just close and reopen the socket
-                    //if (wifiAdapter != null) {
-                    //    this.log.Info("Disconnect", "Disconnecting adapter");
-                    //    // This just kills the Arduino. No possibility of future connections
-                    //    wifiAdapter.Disconnect();
-                    //}
-                }
-                catch(Exception e) {
-                    this.log.Exception(8888, "", e);
-                }
-            });
-        }
+        //            // TODO Arduino has problems if we close the adapter
+        //            // Just close and reopen the socket
+        //            //if (wifiAdapter != null) {
+        //            //    this.log.Info("Disconnect", "Disconnecting adapter");
+        //            //    // This just kills the Arduino. No possibility of future connections
+        //            //    wifiAdapter.Disconnect();
+        //            //}
+        //        }
+        //        catch(Exception e) {
+        //            this.log.Exception(8888, "", e);
+        //        }
+        //    });
+        //}
 
 
         private void DisconnectSynchronous(bool waitForClose) {
@@ -147,10 +147,10 @@ namespace Wifi.UWP.Core {
 
 
 
-        private void ToSatisfyCompilerWarnings() {
-            this.DiscoveredAdapters?.Invoke(this, new List<WifiAdapterInfo>());
-            this.CredentialsRequestedEvent?.Invoke(this, new WifiCredentials());
-        }
+        //private void ToSatisfyCompilerWarnings() {
+        //    this.DiscoveredAdapters?.Invoke(this, new List<WifiAdapterInfo>());
+        //    this.CredentialsRequestedEvent?.Invoke(this, new WifiCredentials());
+        //}
 
 
         #endregion

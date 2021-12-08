@@ -164,7 +164,7 @@ namespace Bluetooth.UWP.Core {
                         // TODO - find out what comes in with no name
                         this.log.Info("DevWatcher_Added", () => string.Format("ADDED +++++ {0} : {1}", deviceInfo.Name, deviceInfo.Id));
                         //this.DebugDumpDeviceInfo(deviceInfo);
-                        BluetoothLEDeviceInfo dev = new BluetoothLEDeviceInfo(new Bluetooth_WinPropertyKeys()) {
+                        BluetoothLEDeviceInfo dev = new(new Bluetooth_WinPropertyKeys()) {
                             Name = deviceInfo.Name,
                             Id = deviceInfo.Id,
                             IsDefault = deviceInfo.IsDefault,
@@ -186,7 +186,9 @@ namespace Bluetooth.UWP.Core {
         }
 
 
+#pragma warning disable IDE0051 // Remove unused private members
         private void DebugDumpDeviceInfo(DeviceInformation device) {
+#pragma warning restore IDE0051 // Remove unused private members
             if (device is not null) {
                 this.log.Error(9999, "Null device");
                 this.log.Info("Dump", () => string.Format("     Name: {0}", device.Name));

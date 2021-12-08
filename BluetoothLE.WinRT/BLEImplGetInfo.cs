@@ -1,9 +1,6 @@
 ﻿using BluetoothLE.Net.DataModels;
 using BluetoothLE.Net.Enumerations;
 using BluetoothLE.Net.interfaces;
-using ChkUtils.Net;
-using System;
-using System.Threading.Tasks;
 using Windows.Devices.Bluetooth;
 using Windows.Devices.Bluetooth.GenericAttributeProfile;
 

@@ -1,6 +1,5 @@
 ﻿using BluetoothLE.Net.interfaces;
 using ChkUtils.Net;
-using System;
 using Windows.Devices.Bluetooth.GenericAttributeProfile;
 
 namespace Bluetooth.UWP.Core {

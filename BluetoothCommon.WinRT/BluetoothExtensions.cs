@@ -1,8 +1,5 @@
 ﻿using Common.Net.Network;
 using LogUtils.Net;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Windows.Devices.Enumeration;
 using Windows.Storage.Streams;
 
@@ -13,7 +10,7 @@ namespace BluetoothCommon.UWP {
 
         #region Data
 
-        private static ClassLog log = new ClassLog("BluetoothExtensions");
+        //private readonly static ClassLog log = new("BluetoothExtensions");
 
         #endregion
 
@@ -36,12 +33,12 @@ namespace BluetoothCommon.UWP {
 
 
 
-        private static bool HasProperty(this DeviceInformation info, string key) {
-            if (info.Properties != null) {
-                return info.Properties.ContainsKey(key);
-            }
-            return false;
-        }
+        //private static bool HasProperty(this DeviceInformation info, string key) {
+        //    if (info.Properties != null) {
+        //        return info.Properties.ContainsKey(key);
+        //    }
+        //    return false;
+        //}
 
 
         public static Dictionary<string, NetPropertyDataModel> CreatePropertiesDictionary(this DeviceInformation info) {
@@ -53,7 +50,7 @@ namespace BluetoothCommon.UWP {
 
 
         public static NetPropertiesUpdateDataModel CreatePropertiesUpdateData(this DeviceInformationUpdate updateInfo) {
-            NetPropertiesUpdateDataModel dm = new NetPropertiesUpdateDataModel() {
+            NetPropertiesUpdateDataModel dm = new() {
                 Id = updateInfo.Id,
                 ServiceProperties = NetPropertyHelpers.CreatePropertiesDictionary(updateInfo.Properties),
             };

@@ -1,7 +1,6 @@
 ﻿using BluetoothLE.Net.Enumerations;
 using Common.Net.Network;
 using LogUtils.Net;
-using System.Collections.Generic;
 using Windows.Devices.Bluetooth;
 using Windows.Devices.Enumeration;
 using Windows.Storage.Streams;
@@ -13,7 +12,7 @@ namespace Bluetooth.UWP.Core {
 
         #region Data
 
-        private static ClassLog log = new ClassLog("BLE_WinExtensions");
+        //private readonly static ClassLog log = new("BLE_WinExtensions");
 
         #endregion
 
@@ -36,12 +35,12 @@ namespace Bluetooth.UWP.Core {
 
 
 
-        private static bool HasProperty(this DeviceInformation info, string key) {
-            if (info.Properties != null) {
-                return info.Properties.ContainsKey(key);
-            }
-            return false;
-        }
+        //private static bool HasProperty(this DeviceInformation info, string key) {
+        //    if (info.Properties != null) {
+        //        return info.Properties.ContainsKey(key);
+        //    }
+        //    return false;
+        //}
 
 
         public static Dictionary<string, NetPropertyDataModel> CreatePropertiesDictionary(this DeviceInformation? info) {
@@ -53,7 +52,7 @@ namespace Bluetooth.UWP.Core {
 
 
         public static NetPropertiesUpdateDataModel CreatePropertiesUpdateData(this DeviceInformationUpdate updateInfo) {
-            NetPropertiesUpdateDataModel dm = new NetPropertiesUpdateDataModel() {
+            NetPropertiesUpdateDataModel dm = new() {
                 Id = updateInfo.Id,
                 ServiceProperties = NetPropertyHelpers.CreatePropertiesDictionary(updateInfo.Properties),
             };
@@ -62,15 +61,11 @@ namespace Bluetooth.UWP.Core {
 
 
         public static BLE_ConnectStatus Convert(this BluetoothConnectionStatus status) {
-            switch (status) {
-                case BluetoothConnectionStatus.Disconnected:
-                    return BLE_ConnectStatus.Disconnected;
-                case BluetoothConnectionStatus.Connected:
-                    return BLE_ConnectStatus.Connected;
-                default:
-                    // Just for compiler. Only 2 enums
-                    return BLE_ConnectStatus.Disconnected;
-            }
+            return status switch {
+                BluetoothConnectionStatus.Disconnected => BLE_ConnectStatus.Disconnected,
+                BluetoothConnectionStatus.Connected => BLE_ConnectStatus.Connected,
+                _ => BLE_ConnectStatus.Disconnected,// Just for compiler. Only 2 enums
+            };
         }
 
 

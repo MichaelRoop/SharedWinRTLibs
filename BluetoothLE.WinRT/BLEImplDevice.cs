@@ -7,11 +7,13 @@ using Windows.Devices.Enumeration;
 namespace Bluetooth.UWP.Core {
 
     public partial class BluetoothLEImplWin32Core : IBLETInterface {
-    
+
         /// <summary>Update any previous information from discovery or other connections</summary>
         /// <param name="device">The BLE device returned</param>
         /// <param name="deviceDataModel">The portable data model to receive values</param>
+#pragma warning disable CA1822 // Mark members as static
         public void UpdateDeviceInfo(BluetoothLEDevice device, BluetoothLEDeviceInfo deviceDataModel) {
+#pragma warning restore CA1822 // Mark members as static
             if (device.DeviceInformation != null) {
                 DeviceInformation di = device.DeviceInformation;
                 deviceDataModel.IsDefault = di.IsDefault;

@@ -4,7 +4,6 @@ using CommunicationStack.Net.interfaces;
 using Ethernet.Common.Net.interfaces;
 using LogUtils.Net;
 using MultiCommData.Net.StorageDataModels;
-using System;
 using VariousUtils.Net;
 
 namespace Ethernet.UWP.Core {
@@ -15,8 +14,8 @@ namespace Ethernet.UWP.Core {
 
         #region Data
 
-        private ClassLog log = new ClassLog("EthernetImplUwp");
-        private IMsgPump<SocketMsgPumpConnectData> msgPump = new SocketMsgPumpEthernet();
+        private readonly ClassLog log = new("EthernetImplUwp");
+        private readonly IMsgPump<SocketMsgPumpConnectData> msgPump = new SocketMsgPumpEthernet();
 
         #endregion
 

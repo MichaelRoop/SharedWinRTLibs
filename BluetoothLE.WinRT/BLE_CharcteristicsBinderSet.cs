@@ -1,16 +1,14 @@
 ﻿using BluetoothLE.Net.Enumerations;
 using ChkUtils.Net;
 using LogUtils.Net;
-using System;
-using System.Collections.Generic;
 
 namespace Bluetooth.UWP.Core {
 
     /// <summary>Manage a list of OS to Data model binders</summary>
     public class BLE_CharcteristicsBinderSet {
 
-        private ClassLog log = new ClassLog("BLE_CharcteristicsBinderSet");
-        private List<BLE_CharacteristicBinder> binders = new List<BLE_CharacteristicBinder>();
+        private readonly ClassLog log = new("BLE_CharcteristicsBinderSet");
+        private readonly List<BLE_CharacteristicBinder> binders = new();
 
 
         /// <summary>Event raised when value changes or the result of a read request</summary>
@@ -21,7 +19,7 @@ namespace Bluetooth.UWP.Core {
         /// <param name="binder">The binder to manager</param>
         public void Add(BLE_CharacteristicBinder binder) {
             this.binders.Add(binder);
-            binder.DataModel.OnReadValueChanged += onReadValueChanged;
+            binder.DataModel.OnReadValueChanged += OnReadValueChanged;
         }
 
 
@@ -30,7 +28,7 @@ namespace Bluetooth.UWP.Core {
             try {
                 foreach (BLE_CharacteristicBinder binder in this.binders) {
                     try {
-                        binder.DataModel.OnReadValueChanged -= onReadValueChanged;
+                        binder.DataModel.OnReadValueChanged -= OnReadValueChanged;
                         binder.Teardown();
                     }
                     catch(Exception e) {
@@ -47,7 +45,7 @@ namespace Bluetooth.UWP.Core {
         }
 
 
-        private void onReadValueChanged(object? sender, BLE_CharacteristicReadResult result) {
+        private void OnReadValueChanged(object? sender, BLE_CharacteristicReadResult result) {
             this.ReadValueChanged?.Invoke(sender, result);
         }
     }

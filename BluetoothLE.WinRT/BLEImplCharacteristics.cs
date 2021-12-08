@@ -2,10 +2,7 @@
 using BluetoothLE.Net.Enumerations;
 using BluetoothLE.Net.interfaces;
 using BluetoothLE.Net.Parsers;
-using System;
-using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 using VariousUtils.Net;
 using Windows.Devices.Bluetooth.GenericAttributeProfile;
 using Windows.Storage.Streams;
@@ -17,7 +14,7 @@ namespace Bluetooth.UWP.Core {
         private async Task BuildCharacteristicDataModel(GattCharacteristic ch, BLE_ServiceDataModel service) {
             try {
                 this.log.InfoEntry("BuildCharacteristicDataModel");
-                BLE_CharacteristicDataModel characteristic = new BLE_CharacteristicDataModel();
+                BLE_CharacteristicDataModel characteristic = new();
                 // Build descriptors first to allow them to be used to build unknown Characteristic values
                 await this.BuildDescriptors(ch, characteristic);
 
@@ -132,9 +129,9 @@ namespace Bluetooth.UWP.Core {
 
         private List<BLE_PresentationFormat> BuildPresentationFormats(GattCharacteristic ch) {
             this.log.InfoEntry("BuildPresentationFormats");
-            List<BLE_PresentationFormat> formats = new List<BLE_PresentationFormat>();
+            List<BLE_PresentationFormat> formats = new();
             foreach (GattPresentationFormat pf in ch.PresentationFormats) {
-                BLE_PresentationFormat format = new BLE_PresentationFormat() {
+                BLE_PresentationFormat format = new() {
                     Description = pf.Description,
                     Exponent = pf.Exponent,
                     Format = (DataFormatEnum)pf.FormatType,
@@ -159,7 +156,9 @@ namespace Bluetooth.UWP.Core {
 
 
 
+#pragma warning disable IDE0051 // Remove unused private members
         private async Task DumpCharacteristic(GattCharacteristic ch) {
+#pragma warning restore IDE0051 // Remove unused private members
             try {
                 if (ch.CharacteristicProperties.HasFlag(GattCharacteristicProperties.Read)) {
                     GattReadResult readResult = await ch.ReadValueAsync();
@@ -204,11 +203,11 @@ namespace Bluetooth.UWP.Core {
                                 // field2 - 2 byte Uint16 - product vendor namespace
                                 // field3 - 2 byte Uint16 - manufacturer ID
                                 // field4 - 2 byte Uint16 - manufacturer version of product
-                                StringBuilder sb = new StringBuilder();
+                                StringBuilder sb = new();
                                 sb
-                                    .Append("Vendor ID:").Append(b[0]).Append(",")
-                                    .Append("Vendor Namespace:").Append(BitConverter.ToInt16(b, 1)).Append(",")
-                                    .Append("Manufacturer ID:").Append(BitConverter.ToInt16(b, 3)).Append(",")
+                                    .Append("Vendor ID:").Append(b[0]).Append(',')
+                                    .Append("Vendor Namespace:").Append(BitConverter.ToInt16(b, 1)).Append(',')
+                                    .Append("Manufacturer ID:").Append(BitConverter.ToInt16(b, 3)).Append(',')
                                     .Append("Manufacturer Namespace:").Append(BitConverter.ToInt16(b, 5));
                                 this.log.Info("DumpCharacteristic", () => string.Format("    Characteristic:{0}  Value:{1}  Handle:{2}",
                                     BLE_DisplayHelpers.GetCharacteristicName(ch), sb.ToString(), ch.AttributeHandle));
@@ -228,11 +227,11 @@ namespace Bluetooth.UWP.Core {
                                 // 2. Maximum Connect interval 6-3200
                                 // 3. Slave latency 0-1000
                                 // 4. Connection Supervisor Timeout Multiplier 10-3200
-                                StringBuilder sb2 = new StringBuilder();
+                                StringBuilder sb2 = new();
                                 sb2
-                                    .Append("Min Connect Interval:").Append(BitConverter.ToInt16(b, 0)).Append(",")
-                                    .Append("Max Connect Interval:").Append(BitConverter.ToInt16(b, 2)).Append(",")
-                                    .Append("Slave Latency:").Append(BitConverter.ToInt16(b, 4)).Append(",")
+                                    .Append("Min Connect Interval:").Append(BitConverter.ToInt16(b, 0)).Append(',')
+                                    .Append("Max Connect Interval:").Append(BitConverter.ToInt16(b, 2)).Append(',')
+                                    .Append("Slave Latency:").Append(BitConverter.ToInt16(b, 4)).Append(',')
                                     .Append("Connect Supervisor Timout multiplier:").Append(BitConverter.ToInt16(b, 6));
                                 this.log.Info("DumpCharacteristic", () => string.Format("    Characteristic:{0}  Value:{1}  Handle:{2}",
                                     BLE_DisplayHelpers.GetCharacteristicName(ch), sb2.ToString(), ch.AttributeHandle));
@@ -283,26 +282,24 @@ namespace Bluetooth.UWP.Core {
                                 int lastIndex = 0;
                                 for (int i = 0; i < count; i++) {
                                     lastIndex = i * blockLimit;
-                                    using (var ms = new DataWriter()) {
-                                        byte[] part = new byte[blockLimit];
-                                        Array.Copy(bytes, lastIndex, part, 0, part.Length);
-                                        this.log.Error(9191, part.ToFormatedByteString());
-                                        ms.WriteBytes(part);
-                                        var result = await ch.WriteValueAsync(ms.DetachBuffer());
-                                    }
+                                    using var ms = new DataWriter();
+                                    byte[] part = new byte[blockLimit];
+                                    Array.Copy(bytes, lastIndex, part, 0, part.Length);
+                                    this.log.Error(9191, part.ToFormatedByteString());
+                                    ms.WriteBytes(part);
+                                    var result = await ch.WriteValueAsync(ms.DetachBuffer());
                                 }
 
                                 if (lastIndex > 0) {
                                     if (lastIndex > 0) {
                                         lastIndex += blockLimit;
                                     }
-                                    using (var ms = new DataWriter()) {
-                                        byte[] part = new byte[rest];
-                                        Array.Copy(bytes, lastIndex, part, 0, part.Length);
-                                        this.log.Error(9192, part.ToFormatedByteString());
-                                        ms.WriteBytes(part);
-                                        var result = await ch.WriteValueAsync(ms.DetachBuffer());
-                                    }
+                                    using var ms = new DataWriter();
+                                    byte[] part = new byte[rest];
+                                    Array.Copy(bytes, lastIndex, part, 0, part.Length);
+                                    this.log.Error(9192, part.ToFormatedByteString());
+                                    ms.WriteBytes(part);
+                                    var result = await ch.WriteValueAsync(ms.DetachBuffer());
                                 }
 
                             }

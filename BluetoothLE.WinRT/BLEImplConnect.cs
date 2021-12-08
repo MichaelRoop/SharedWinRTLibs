@@ -1,8 +1,6 @@
 ﻿using BluetoothLE.Net.DataModels;
 using BluetoothLE.Net.Enumerations;
 using BluetoothLE.Net.interfaces;
-using System;
-using System.Threading.Tasks;
 
 namespace Bluetooth.UWP.Core {
 

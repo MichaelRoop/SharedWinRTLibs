@@ -1,9 +1,6 @@
 ﻿using BluetoothLE.Net.DataModels;
 using BluetoothLE.Net.Enumerations;
 using BluetoothLE.Net.interfaces;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Windows.Devices.Bluetooth.GenericAttributeProfile;
 
 namespace Bluetooth.UWP.Core {
@@ -24,7 +21,7 @@ namespace Bluetooth.UWP.Core {
                             if (r.Status == GattCommunicationStatus.Success) {
                                 // New characteristic data model to add to service
                                 IDescParser parser = this.descParserfactory.GetParser(desc.Uuid, desc.AttributeHandle);
-                                BLE_DescriptorDataModel descDataModel = new BLE_DescriptorDataModel() {
+                                BLE_DescriptorDataModel descDataModel = new() {
                                     Uuid = desc.Uuid,
                                     AttributeHandle = desc.AttributeHandle,
                                     ProtectionLevel = (BLE_ProtectionLevel)desc.ProtectionLevel,
@@ -49,9 +46,9 @@ namespace Bluetooth.UWP.Core {
         }
 
 
-        private void DebugDumpDescriptor(GattDescriptor d) {
+        //private void DebugDumpDescriptor(GattDescriptor d) {
 
-        }
+        //}
 
     }
 

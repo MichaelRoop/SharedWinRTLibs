@@ -1,9 +1,6 @@
 ﻿using BluetoothLE.Net.DataModels;
 using BluetoothLE.Net.Enumerations;
-using BluetoothLE.Net.Parsers;
 using LogUtils.Net;
-using System;
-using System.Threading.Tasks;
 using VariousUtils.Net;
 using Windows.Devices.Bluetooth.GenericAttributeProfile;
 using Windows.Storage.Streams;
@@ -18,8 +15,8 @@ namespace Bluetooth.UWP.Core {
         #region Data
 
         private const int BLE_BLOCK_SIZE = 20;
-        private ClassLog log = new ClassLog("BLE_CharacteristicBinder");
-        private bool subscribed = false;
+        private readonly ClassLog log = new("BLE_CharacteristicBinder");
+        private readonly bool subscribed = false;
 
         #endregion
 
@@ -47,8 +44,8 @@ namespace Bluetooth.UWP.Core {
             if (this.subscribed) {
                 this.OSCharacteristic.ValueChanged += this.OSCharacteristicReadValueChangedHandler;
             }
-            this.DataModel.WriteRequestEvent += this.onDataModelWriteRequestHandler;
-            this.DataModel.ReadRequestEvent += this.onDataModelReadRequestHandler;
+            this.DataModel.WriteRequestEvent += this.OnDataModelWriteRequestHandler;
+            this.DataModel.ReadRequestEvent += this.OnDataModelReadRequestHandler;
         }
 
 
@@ -58,8 +55,8 @@ namespace Bluetooth.UWP.Core {
             if (this.subscribed) {
                 this.OSCharacteristic.ValueChanged -= this.OSCharacteristicReadValueChangedHandler;
             }
-            this.DataModel.WriteRequestEvent -= this.onDataModelWriteRequestHandler;
-            this.DataModel.ReadRequestEvent -= this.onDataModelReadRequestHandler;
+            this.DataModel.WriteRequestEvent -= this.OnDataModelWriteRequestHandler;
+            this.DataModel.ReadRequestEvent -= this.OnDataModelReadRequestHandler;
         }
 
         #endregion
@@ -69,7 +66,7 @@ namespace Bluetooth.UWP.Core {
         /// <summary>Handles read request from the user via the Characteristic Data Model</summary>
         /// <param name="sender">Originator of request</param>
         /// <param name="args">The event args. Has nothing</param>
-        private void onDataModelReadRequestHandler(object? sender, EventArgs args) {
+        private void OnDataModelReadRequestHandler(object? sender, EventArgs args) {
             Task.Run(async () => {
                 try {
                     GattReadResult result = await this.OSCharacteristic.ReadValueAsync();
@@ -87,7 +84,7 @@ namespace Bluetooth.UWP.Core {
 
 
         /// <summary>Write out the incoming message to the OS characteristic</summary>
-        private void onDataModelWriteRequestHandler(object? sender, byte[] data) {
+        private void OnDataModelWriteRequestHandler(object? sender, byte[] data) {
             Task.Run(async () => {
                 try {
                     this.log.Info("onDataModelWriteRequestHandler", () => string.Format("{0}", data.ToFormatedByteString()));
@@ -151,16 +148,15 @@ namespace Bluetooth.UWP.Core {
         private async Task<bool> WriteBlock(byte[] data, int index, int size) {
             try {
                 this.log.Info("WriteBlock", "Write to Gatt");
-                using (var ms = new DataWriter()) {
-                    byte[] part = new byte[size];
-                    Array.Copy(data, index, part, 0, part.Length);
-                    ms.WriteBytes(part);
-                    GattCommunicationStatus result = await 
-                        this.OSCharacteristic.WriteValueAsync(ms.DetachBuffer());
-                    this.log.Info("WriteBlock", () => string.Format("WriteValueAsync result:{0}", result.ToString()));
+                using var ms = new DataWriter();
+                byte[] part = new byte[size];
+                Array.Copy(data, index, part, 0, part.Length);
+                ms.WriteBytes(part);
+                GattCommunicationStatus result = await
+                    this.OSCharacteristic.WriteValueAsync(ms.DetachBuffer());
+                this.log.Info("WriteBlock", () => string.Format("WriteValueAsync result:{0}", result.ToString()));
 
-                    return this.ParseGattStatue(result);
-                }
+                return this.ParseGattStatue(result);
             }
             catch (Exception e) {
                 this.log.Exception(9999, "WriteBlock", "", e);
@@ -173,24 +169,22 @@ namespace Bluetooth.UWP.Core {
         /// <param name="gattStatus">The UWP Gatt status</param>
         /// <returns>true on success, otherwise false where an error raised</returns>
         private bool ParseGattStatue(GattCommunicationStatus gattStatus) {
-            BLE_CharacteristicCommunicationStatus status = BLE_CharacteristicCommunicationStatus.Success;
             switch (gattStatus) {
                 case GattCommunicationStatus.Success:
                     return true;
                 case GattCommunicationStatus.Unreachable:
-                    status = BLE_CharacteristicCommunicationStatus.Unreachable;
+                    this.DataModel.PushCommunicationError(BLE_CharacteristicCommunicationStatus.Unreachable);
                     break;
                 case GattCommunicationStatus.ProtocolError:
-                    status = BLE_CharacteristicCommunicationStatus.ProtocolError;
+                    this.DataModel.PushCommunicationError(BLE_CharacteristicCommunicationStatus.ProtocolError);
                     break;
                 case GattCommunicationStatus.AccessDenied:
-                    status = BLE_CharacteristicCommunicationStatus.AccessDenied;
+                    this.DataModel.PushCommunicationError(BLE_CharacteristicCommunicationStatus.AccessDenied);
                     break;
                 default:
-                    status = BLE_CharacteristicCommunicationStatus.UnknownError;
+                    this.DataModel.PushCommunicationError(BLE_CharacteristicCommunicationStatus.UnknownError);
                     break;
             }
-            this.DataModel.PushCommunicationError(status);
             return false;
         }
 

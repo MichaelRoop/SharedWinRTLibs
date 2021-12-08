@@ -2,8 +2,6 @@
 using BluetoothLE.Net.Enumerations;
 using BluetoothLE.Net.interfaces;
 using Common.Net.Network;
-using System;
-using System.Threading.Tasks;
 
 namespace Bluetooth.UWP.Core {
 
@@ -30,16 +28,19 @@ namespace Bluetooth.UWP.Core {
         #region IBLETInterface:ICommStackChannel events
 
         // TODO - the read thread on the BLE will raise this
+        // TODO - update this. Not using this to pass up bytes. See where it is done
         // When bytes come in
         public event EventHandler<byte[]>? MsgReceivedEvent;
 
         #endregion
 
 
-
+        // TODO - see if we can do without these ToStatisfyCompilerWarnings now
+#pragma warning disable IDE0051 // Remove unused private members
         private void ToStatisfyCompilerWarnings() {
-            // TODO use this later
-            this.MsgReceivedEvent?.Invoke(this, new byte[0]);
+#pragma warning restore IDE0051 // Remove unused private members
+                               // TODO use this later
+            this.MsgReceivedEvent?.Invoke(this, Array.Empty<byte>());
         }
 
 

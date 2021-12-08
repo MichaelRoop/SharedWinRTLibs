@@ -1,7 +1,4 @@
 ﻿using Common.Net.Network.interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BluetoothCommon.UWP {
 

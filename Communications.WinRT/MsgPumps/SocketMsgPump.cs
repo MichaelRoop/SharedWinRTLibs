@@ -2,11 +2,6 @@
 using CommunicationStack.Net.Enumerations;
 using CommunicationStack.Net.interfaces;
 using LogUtils.Net;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using VariousUtils.Net;
 using Windows.Networking;
 using Windows.Networking.Sockets;
@@ -18,14 +13,14 @@ namespace Communications.WinRT.MsgPumps {
 
         #region Data
 
-        private ClassLog log = new ClassLog("SocketMsgPump");
+        private readonly ClassLog log = new("SocketMsgPump");
         private StreamSocket? socket = null;
         private DataWriter? writer = null;
         private DataReader? reader = null;
         private CancellationTokenSource? readCancelationToken = null;
         private bool continueReading = false;
         private uint readBufferMaxSizer = 256;
-        private ManualResetEvent readFinishedEvent = new ManualResetEvent(false);
+        private readonly ManualResetEvent readFinishedEvent = new(false);
 
         #endregion
 
@@ -66,10 +61,10 @@ namespace Communications.WinRT.MsgPumps {
 
 
 
-                    this.writer = new DataWriter(this.socket.OutputStream);
+                    this.writer = new(this.socket.OutputStream);
                     this.writer.UnicodeEncoding = Windows.Storage.Streams.UnicodeEncoding.Utf8;
 
-                    this.reader = new DataReader(this.socket.InputStream);
+                    this.reader = new(this.socket.InputStream);
                     this.reader.InputStreamOptions = InputStreamOptions.Partial;
                     this.reader.UnicodeEncoding = Windows.Storage.Streams.UnicodeEncoding.Utf8;
                     this.reader.ByteOrder = ByteOrder.LittleEndian;

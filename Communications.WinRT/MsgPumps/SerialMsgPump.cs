@@ -14,7 +14,7 @@ namespace Communications.WinRT.MsgPumps {
 
         #region Data
 
-        private ClassLog log = new ClassLog("SerialMsgPump");
+        private readonly ClassLog log = new("SerialMsgPump");
         private IInputStream? inStream;
         private IOutputStream? outStream;
 
@@ -23,7 +23,7 @@ namespace Communications.WinRT.MsgPumps {
         private CancellationTokenSource? readCancelationToken;
         private bool continueReading = false;
         private uint readBufferMaxSizer = 256;
-        private ManualResetEvent readFinishedEvent = new ManualResetEvent(false);
+        private readonly ManualResetEvent readFinishedEvent = new(false);
 
 
         #endregion
@@ -44,10 +44,10 @@ namespace Communications.WinRT.MsgPumps {
                     this.inStream = paramsObj.InStream;
                     this.outStream = paramsObj.OutStream;
                     
-                    this.writer = new DataWriter(this.outStream);
+                    this.writer = new (this.outStream);
                     this.writer.UnicodeEncoding = Windows.Storage.Streams.UnicodeEncoding.Utf8;
 
-                    this.reader = new DataReader(this.inStream);
+                    this.reader = new (this.inStream);
                     this.reader.InputStreamOptions = InputStreamOptions.Partial;
                     this.reader.UnicodeEncoding = Windows.Storage.Streams.UnicodeEncoding.Utf8;
                     this.reader.ByteOrder = ByteOrder.LittleEndian;

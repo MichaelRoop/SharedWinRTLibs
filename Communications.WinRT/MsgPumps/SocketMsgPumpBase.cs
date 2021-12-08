@@ -13,7 +13,7 @@ namespace Communications.WinRT.MsgPumps {
 
         #region Data
 
-        private ClassLog log = new ClassLog("SocketMsgPumpBase");
+        private readonly ClassLog log = new("SocketMsgPumpBase");
         private static bool continueReading = false;
         private static bool isConnected = false;
 
@@ -63,10 +63,10 @@ namespace Communications.WinRT.MsgPumps {
                     i.LocalAddress, i.LocalPort,
                     i.RemoteHostName, i.RemotePort, i.RemoteServiceName, i.ProtectionLevel));
 
-                this.writer = new DataWriter(this.socket.OutputStream);
+                this.writer = new (this.socket.OutputStream);
                 this.writer.UnicodeEncoding = Windows.Storage.Streams.UnicodeEncoding.Utf8;
 
-                this.reader = new DataReader(socket.InputStream);
+                this.reader = new (socket.InputStream);
                 this.reader.InputStreamOptions = InputStreamOptions.Partial;
                 this.reader.UnicodeEncoding = Windows.Storage.Streams.UnicodeEncoding.Utf8;
                 this.reader.ByteOrder = ByteOrder.LittleEndian;
@@ -108,10 +108,10 @@ namespace Communications.WinRT.MsgPumps {
                         i.LocalAddress, i.LocalPort,
                         i.RemoteHostName, i.RemotePort, i.RemoteServiceName, i.ProtectionLevel));
 
-                    this.writer = new DataWriter(this.socket.OutputStream);
+                    this.writer = new (this.socket.OutputStream);
                     this.writer.UnicodeEncoding = Windows.Storage.Streams.UnicodeEncoding.Utf8;
 
-                    this.reader = new DataReader(socket.InputStream);
+                    this.reader = new (socket.InputStream);
                     this.reader.InputStreamOptions = InputStreamOptions.Partial;
                     this.reader.UnicodeEncoding = Windows.Storage.Streams.UnicodeEncoding.Utf8;
                     this.reader.ByteOrder = ByteOrder.LittleEndian;

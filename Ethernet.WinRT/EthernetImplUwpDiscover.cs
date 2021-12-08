@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Windows.Networking.Connectivity;
+﻿using Windows.Networking.Connectivity;
 
 namespace Ethernet.UWP.Core {
 

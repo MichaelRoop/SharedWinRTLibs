@@ -14,19 +14,17 @@ namespace Bluetooth.UWP.Core {
 
         #region data
 
-        private ManualResetEvent stopped = new ManualResetEvent(false);
+        private readonly ManualResetEvent stopped = new(false);
 
         /// <summary>Allows discovery of device list</summary>
         private DeviceWatcher? devWatcher = null;
 
         private BluetoothLEDevice? currentDevice = null;
-        private List<GattDeviceService> currentServices = new List<GattDeviceService>();
-
-        private BLE_CharcteristicsBinderSet binderSet = new BLE_CharcteristicsBinderSet();
-        private IDescParserFactory descParserfactory = new DescParserFactory();
-        private ICharParserFactory charParserFactory = new CharParserFactory();
-
-        private ClassLog log = new ClassLog("BluetoothLEImplWin32");
+        private readonly List<GattDeviceService> currentServices = new();
+        private readonly BLE_CharcteristicsBinderSet binderSet = new();
+        private readonly IDescParserFactory descParserfactory = new DescParserFactory();
+        private readonly ICharParserFactory charParserFactory = new CharParserFactory();
+        private readonly ClassLog log = new("BluetoothLEImplWin32");
 
         #endregion
 

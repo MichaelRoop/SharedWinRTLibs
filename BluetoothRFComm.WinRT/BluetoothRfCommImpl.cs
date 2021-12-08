@@ -1,56 +1,26 @@
-﻿#define USE_BT_WRAPPER
-
-using BluetoothCommon.Net;
+﻿using BluetoothCommon.Net;
 using BluetoothCommon.Net.interfaces;
 using Communications.WinRT.MsgPumps;
 using CommunicationStack.Net.DataModels;
 using CommunicationStack.Net.Enumerations;
 using CommunicationStack.Net.interfaces;
 using LogUtils.Net;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using VariousUtils.Net;
 using Windows.Networking.Sockets;
 
 namespace BluetoothRfComm.UWP.Core {
 
-    #region OLD DATA NOT SURE IF IT APPLIES - SEE BELOW
-    // STEPS TO USE UWP libs in Win32
-    // Windows.Foundation.UniversalApiContract
-    // C:\Program Files(x86)\Windows Kits\10\References\10.0.18362.0\Windows.Foundation.UniversalApiContract\8.0.0.0\Windows.Foundation.UniversalApiContract.winmd
-
-    //Windows.Foundation.FoundationContract
-    //C:\Program Files (x86)\Windows Kits\10\References\10.0.18362.0\Windows.Foundation.FoundationContract\3.0.0.0\Windows.Foundation.FoundationContract.winmd
-
-    //Windows
-    //C:\Program Files (x86)\Windows Kits\10\UnionMetadata\10.0.18362.0\Facade\windows.winmd
-
-    //System.Runtime.WindowsRuntime
-    //C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETCore\v4.5\System.Runtime.WindowsRuntime.dll
-
-    //System.Runtime.InteropServices.WindowsRuntime
-    //C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\Facades\System.Runtime.InteropServices.WindowsRuntime.dll
-
-    // Add to manifest
-    //https://stackoverflow.com/questions/38845320/uwp-serialdevice-fromidasync-throws-element-not-found-exception-from-hresult
-    #endregion
-
-    // *** UPDATE: Looks like you only have to add the NuGet package:
-    // Microsoft.Windows.SDK.Contracts(nn.n.nnnn.n)
-    //Not sure if you need to add to manifest. If so, would only be in main App
-
     public partial class BluetoothRfCommUwpCore : IBTInterface {
 
         #region Data
 
-        private ClassLog log = new ClassLog("BluetoothRfCommImpl");
+        private readonly ClassLog log = new("BluetoothRfCommImpl");
         private readonly string KEY_CAN_PAIR = "System.Devices.Aep.CanPair";
         private readonly string KEY_IS_PAIRED = "System.Devices.Aep.IsPaired";
         //private readonly string KEY_CONTAINER_ID = "System.Devices.Aep.ContainerId";
         private readonly string KEY_SIGNAL_STRENGTH = "System.Devices.Aep.SignalStrength";
-        private static uint READ_BUFF_MAX_SIZE = 256;
-        IMsgPump<SocketMsgPumpConnectData> msgPump = new SocketMsgPumpBluetooth();
+        private readonly static uint READ_BUFF_MAX_SIZE = 256;
+        private readonly IMsgPump<SocketMsgPumpConnectData> msgPump = new SocketMsgPumpBluetooth();
 
         #endregion
 
@@ -172,8 +142,8 @@ namespace BluetoothRfComm.UWP.Core {
 
         private int GetIntProperty(IReadOnlyDictionary<string, object> property, string key, int defaultValue) {
             if (property.ContainsKey(key)) {
-                if (property[key] is int) {
-                    return (int)property[key];
+                if (property[key] is int @int) {
+                    return @int;
                 }
                 this.log.Error(9999, () => string.Format(
                     "{0} Property is {1} rather than int", key, property[key].GetType().Name));

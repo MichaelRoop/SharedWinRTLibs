@@ -112,7 +112,9 @@ namespace Wifi.UWP.Core {
         }
 
 
+#pragma warning disable IDE0051 // Remove unused private members
         private async Task DumpWifiAdapterInfo(WiFiAdapter adapter) {
+#pragma warning restore IDE0051 // Remove unused private members
             try {
                 if (adapter == null) {
                     this.log.Info("DumpWifiAdapterInfo", () => string.Format("Entry"));
@@ -172,7 +174,9 @@ namespace Wifi.UWP.Core {
         }
 
 
+#pragma warning disable CA1822 // Mark members as static
         private PasswordCredential? GetCredentials(WifiNetworkInfo info) {
+#pragma warning restore CA1822 // Mark members as static
             if (info.AuthenticationType == NetAuthenticationType.Open_802_11 &&
                 info.EncryptionType == NetEncryptionType.None) {
                 return null;

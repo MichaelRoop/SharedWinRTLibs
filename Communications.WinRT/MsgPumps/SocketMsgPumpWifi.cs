@@ -13,8 +13,8 @@
         // Must provide statics to kill the read thread since it is triggered from 
         // a different thread in base async methods
 
-        private static CancellationTokenSource CANCEL_TOKEN = new CancellationTokenSource(1);
-        private static ManualResetEvent FINISH_READ_EVENT = new ManualResetEvent(false);
+        private static CancellationTokenSource CANCEL_TOKEN = new(1);
+        private readonly static ManualResetEvent FINISH_READ_EVENT = new(false);
 
         #endregion
 

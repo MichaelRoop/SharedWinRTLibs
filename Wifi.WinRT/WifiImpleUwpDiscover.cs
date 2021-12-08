@@ -1,20 +1,11 @@
 ﻿using ChkUtils.Net;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using VariousUtils.Net;
 using Wifi.UWP.Core.Helpers;
 using WifiCommon.Net.DataModels;
 using WifiCommon.Net.Enumerations;
 using WifiCommon.Net.interfaces;
 using Windows.Devices.WiFi;
-using Windows.Networking;
-using Windows.Networking.Connectivity;
-using Windows.Networking.Sockets;
 using Windows.Security.Credentials;
-using Windows.Storage.Streams;
 
 namespace Wifi.UWP.Core {
 
@@ -23,7 +14,7 @@ namespace Wifi.UWP.Core {
         #region Data
 
         private static WiFiAdapter? wifiAdapter = null;
-        private static WifiAdapterInfo adapterInfo = new WifiAdapterInfo();
+        private readonly static WifiAdapterInfo adapterInfo = new();
         private static IReadOnlyList<WiFiAvailableNetwork> networks = new List<WiFiAvailableNetwork>();
 
         #endregion
@@ -83,7 +74,7 @@ namespace Wifi.UWP.Core {
                     // We will not return those with blank SSID
                     foreach (var net in networks) {
                         if (net.Ssid.Length > 0) {
-                            WifiNetworkInfo netInfo = new WifiNetworkInfo() {
+                            WifiNetworkInfo netInfo = new() {
                                 SSID = net.Ssid,
                                 Kind = net.NetworkKind.Convert(),
                                 ChanneCenterFrequencyKlhz = net.ChannelCenterFrequencyInKilohertz,
@@ -123,47 +114,47 @@ namespace Wifi.UWP.Core {
         }
 
 
-        private  void DisplayNetworkReport(WiFiNetworkReport report) {
-            this.log.Info("DisplayNetworkReport", () => 
-                string.Format("Timestamp {0} Count {1}", report.Timestamp, report.AvailableNetworks.Count));
-            foreach (var net in report.AvailableNetworks) {
-                this.log.Info("DisplayNetworkReport", () =>
-                    string.Format(
-                        "SSID:{0}",
-                        net.Ssid));
-            }
-        }
+        //private  void DisplayNetworkReport(WiFiNetworkReport report) {
+        //    this.log.Info("DisplayNetworkReport", () => 
+        //        string.Format("Timestamp {0} Count {1}", report.Timestamp, report.AvailableNetworks.Count));
+        //    foreach (var net in report.AvailableNetworks) {
+        //        this.log.Info("DisplayNetworkReport", () =>
+        //            string.Format(
+        //                "SSID:{0}",
+        //                net.Ssid));
+        //    }
+        //}
 
 
 
-        private async Task<WifiErrorCode> ConnectToNetwork(WiFiAdapter adapter, string ssid, string password) {
-            try {
-                // Should already be scanned
-                WiFiNetworkReport report = adapter.NetworkReport;
-                WifiErrorCode returnValue = WifiErrorCode.NetworkNotAvailable;
-                foreach (var net in report.AvailableNetworks) {
-                    if (net.Ssid == ssid) {
-                        // TODO Will need to have multiple types of authentication
-                        PasswordCredential cred = new PasswordCredential() {
-                            Password = password
-                        };
-                        returnValue = (await adapter.ConnectAsync(net, WiFiReconnectionKind.Automatic, cred)).ConnectionStatus.Convert();
-                        break;
-                    }
-                }
-                if (returnValue != WifiErrorCode.Success) {
-                    this.OnError?.Invoke(this, new WifiError(returnValue));
-                }
-                return returnValue;
-            }
-            catch (Exception e) {
-                WrapErr.SafeAction(() => {
-                    this.log.Exception(9999, "ConnectToNetwork", "", e);
-                    this.OnError?.Invoke(this, new WifiError( WifiErrorCode.Unknown));
-                });
-                return WifiErrorCode.Unknown;
-            }
-        }
+        //private async Task<WifiErrorCode> ConnectToNetwork(WiFiAdapter adapter, string ssid, string password) {
+        //    try {
+        //        // Should already be scanned
+        //        WiFiNetworkReport report = adapter.NetworkReport;
+        //        WifiErrorCode returnValue = WifiErrorCode.NetworkNotAvailable;
+        //        foreach (var net in report.AvailableNetworks) {
+        //            if (net.Ssid == ssid) {
+        //                // TODO Will need to have multiple types of authentication
+        //                PasswordCredential cred = new PasswordCredential() {
+        //                    Password = password
+        //                };
+        //                returnValue = (await adapter.ConnectAsync(net, WiFiReconnectionKind.Automatic, cred)).ConnectionStatus.Convert();
+        //                break;
+        //            }
+        //        }
+        //        if (returnValue != WifiErrorCode.Success) {
+        //            this.OnError?.Invoke(this, new WifiError(returnValue));
+        //        }
+        //        return returnValue;
+        //    }
+        //    catch (Exception e) {
+        //        WrapErr.SafeAction(() => {
+        //            this.log.Exception(9999, "ConnectToNetwork", "", e);
+        //            this.OnError?.Invoke(this, new WifiError( WifiErrorCode.Unknown));
+        //        });
+        //        return WifiErrorCode.Unknown;
+        //    }
+        //}
 
 
 
@@ -303,7 +294,9 @@ namespace Wifi.UWP.Core {
         }
 
 
+#pragma warning disable IDE0051 // Remove unused private members
         private void DumpNetworkInfo(WifiNetworkInfo info) {
+#pragma warning restore IDE0051 // Remove unused private members
             this.log.Info("DumpNetworkInfo", () => string.Format("-----------------------------------------------------"));
             this.log.Info("DumpNetworkInfo", () => string.Format("                    SSID: {0}", info.SSID));
             this.log.Info("DumpNetworkInfo", () => string.Format("             Wifi Direct: {0}", info.IsWifiDirect));

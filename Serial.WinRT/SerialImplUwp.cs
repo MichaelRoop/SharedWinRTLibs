@@ -4,8 +4,6 @@ using LogUtils.Net;
 using SerialCommon.Net.DataModels;
 using SerialCommon.Net.Enumerations;
 using SerialCommon.Net.interfaces;
-using System;
-using System.Collections.Generic;
 using VariousUtils.Net;
 
 namespace Serial.UWP.Core {
@@ -34,7 +32,7 @@ namespace Serial.UWP.Core {
 
 
 
-        ClassLog log = new ClassLog("SerialImplUwp");
+        private readonly ClassLog log = new("SerialImplUwp");
 
 
         public bool Connected { get; private set; } = false;

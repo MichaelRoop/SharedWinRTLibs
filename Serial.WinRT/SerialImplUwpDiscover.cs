@@ -28,7 +28,7 @@ namespace Serial.UWP.Core {
         //   to connect and time out on connect. Takes over 5000ms for 
         //   each not connected
         // On the other hand, if not connected, it completes in 1ms with this querry
-        private string AQSForUSB = string.Format(
+        private readonly string AQSForUSB = string.Format(
             "System.Devices.InterfaceClassGuid:=\"{0}\" {1} {2} {3}",
             "{86E0D1E0-8089-11D0-9CE4-08003E301F73}",
             "AND System.Devices.InterfaceEnabled:=System.StructuredQueryType.Boolean#True",
@@ -42,10 +42,10 @@ namespace Serial.UWP.Core {
             Task.Run(async () => {
             try {
                 DeviceInformationCollection infos = await DeviceInformation.FindAllAsync(this.AQSForUSB);
-                Stopwatch sw = new Stopwatch();
+                Stopwatch sw = new();
                 sw.Start();
 
-                List<SerialDeviceInfo> devices = new List<SerialDeviceInfo>();
+                List<SerialDeviceInfo> devices = new();
 
                 // TODO - SerialDevice.FromIdAsync(deviceId). Except do not know if same ID as from DeviceInformation
                 foreach (DeviceInformation info in infos) {
@@ -57,8 +57,8 @@ namespace Serial.UWP.Core {
                             // default in Arduino it does not show
                             using (SerialDevice dev = await SerialDevice.FromIdAsync(info.Id)) {
                             if (dev != null) {
-                                UsbDisplay display = new UsbDisplay(dev.UsbVendorId, dev.UsbProductId);
-                                SerialDeviceInfo device = new SerialDeviceInfo() {
+                                UsbDisplay display = new(dev.UsbVendorId, dev.UsbProductId);
+                                SerialDeviceInfo device = new() {
                                     Id = info.Id,
                                     IsDefault = info.IsDefault,
                                     IsEnabled = info.IsEnabled,
@@ -157,7 +157,7 @@ namespace Serial.UWP.Core {
             this.log.Info("DoDiscovery", () => string.Format("   Enabled:{0}", info.IsEnabled));
             this.log.Info("DoDiscovery", () => string.Format("   {0}", "Properties -------------"));
             foreach (var p in info.Properties) {
-                string key = p.Key == null ? "''" : p.Key;
+                string key = p.Key ??"''";
                 string? value = p.Value == null ? "''" : p.Value.ToString();
                 if (value is null) {
                     value = "''";
@@ -189,14 +189,15 @@ namespace Serial.UWP.Core {
         }
 
         #region Test code for USB Device Dump
+#pragma warning disable IDE0051 // Remove unused private members
         private void DumpUsbDevice(UsbDevice usb) {
+#pragma warning restore IDE0051 // Remove unused private members
             foreach (var d in usb.Configuration.Descriptors) {
 
-                Windows.Storage.Streams.Buffer buff = new Windows.Storage.Streams.Buffer(500);
+                Windows.Storage.Streams.Buffer buff = new(500);
                 d.ReadDescriptorBuffer(buff);
-                using (var reader = Windows.Storage.Streams.DataReader.FromBuffer(buff)) {
-                    this.log.Error(9, reader.ReadString(buff.Length));
-                }
+                using var reader = Windows.Storage.Streams.DataReader.FromBuffer(buff);
+                this.log.Error(9, reader.ReadString(buff.Length));
                 //DataReader reader = new DataReader()
 
                 //d.Length

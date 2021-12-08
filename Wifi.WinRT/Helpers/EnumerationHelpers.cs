@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using VariousUtils.Net;
+﻿using VariousUtils.Net;
 using WifiCommon.Net.Enumerations;
 using Windows.Devices.WiFi;
 using Windows.Networking.Connectivity;
@@ -35,16 +32,16 @@ namespace Wifi.UWP.Core.Helpers {
 
 
         public static WifiErrorCode Convert (this WiFiConnectionStatus connectionStatus) {
-            switch (connectionStatus) {
-                case WiFiConnectionStatus.UnspecifiedFailure: return WifiErrorCode.Unknown;
-                case WiFiConnectionStatus.Success: return WifiErrorCode.Success;
-                case WiFiConnectionStatus.AccessRevoked: return WifiErrorCode.AccessRevoked;
-                case WiFiConnectionStatus.InvalidCredential: return WifiErrorCode.InvalidCredentials;
-                case WiFiConnectionStatus.NetworkNotAvailable: return WifiErrorCode.NetworkNotAvailable;
-                case WiFiConnectionStatus.Timeout: return WifiErrorCode.Timeout;
-                case WiFiConnectionStatus.UnsupportedAuthenticationProtocol: return WifiErrorCode.UnsupportedAuthenticationProtocol;
-                default: return WifiErrorCode.Unknown;
-            }
+            return connectionStatus switch {
+                WiFiConnectionStatus.UnspecifiedFailure => WifiErrorCode.Unknown,
+                WiFiConnectionStatus.Success => WifiErrorCode.Success,
+                WiFiConnectionStatus.AccessRevoked => WifiErrorCode.AccessRevoked,
+                WiFiConnectionStatus.InvalidCredential => WifiErrorCode.InvalidCredentials,
+                WiFiConnectionStatus.NetworkNotAvailable => WifiErrorCode.NetworkNotAvailable,
+                WiFiConnectionStatus.Timeout => WifiErrorCode.Timeout,
+                WiFiConnectionStatus.UnsupportedAuthenticationProtocol => WifiErrorCode.UnsupportedAuthenticationProtocol,
+                _ => WifiErrorCode.Unknown,
+            };
         }
 
 

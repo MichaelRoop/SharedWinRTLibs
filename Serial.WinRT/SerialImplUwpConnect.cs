@@ -3,8 +3,6 @@ using CommunicationStack.Net.interfaces;
 using SerialCommon.Net.DataModels;
 using SerialCommon.Net.Enumerations;
 using SerialCommon.Net.interfaces;
-using System;
-using System.Threading.Tasks;
 using Windows.Devices.Enumeration;
 using Windows.Devices.SerialCommunication;
 
@@ -12,8 +10,8 @@ namespace Serial.UWP.Core {
 
     public partial class SerialImplUwp : ISerialInterface {
 
-        SerialDevice? device = null;
-        IMsgPump<SerialMsgPumpConnectData> msgPump = new SerialMsgPump();
+        private SerialDevice? device = null;
+        private readonly IMsgPump<SerialMsgPumpConnectData> msgPump = new SerialMsgPump();
 
         private void DoDisconnect() {
             // Always disconnect pump first

@@ -1,11 +1,8 @@
 ﻿using BluetoothCommon.Net;
 using BluetoothCommon.Net.interfaces;
 using BluetoothCommon.UWP;
-using System;
-using System.Threading.Tasks;
 using Windows.Devices.Bluetooth;
 using Windows.Devices.Enumeration;
-using Windows.Devices.Radios;
 
 namespace BluetoothRfComm.UWP.Core {
 
@@ -45,7 +42,7 @@ namespace BluetoothRfComm.UWP.Core {
                         this.ListProperties(info.Properties);
                         
 
-                        BTDeviceInfo deviceInfo = new BTDeviceInfo() {
+                        BTDeviceInfo deviceInfo = new() {
                             Name = info.Name,
                             Connected = false,
                             Address = info.Id,
