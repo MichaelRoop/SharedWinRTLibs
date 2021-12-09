@@ -1,5 +1,4 @@
 ﻿using Common.Net.Network;
-using LogUtils.Net;
 using Windows.Devices.Enumeration;
 using Windows.Storage.Streams;
 
