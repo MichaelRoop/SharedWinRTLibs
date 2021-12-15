@@ -105,7 +105,27 @@
       "ProjectGuid": "da4d9a94-68a8-4bdc-8981-60de57a45854",
       "DisplayName": "BluetoothLE.Net",
       "ColorIndex": 3
+    },
+    "f8df98dd-993d-4aff-af6f-53769b12722d": {
+      "ProjectGuid": "f8df98dd-993d-4aff-af6f-53769b12722d",
+      "DisplayName": "WifiCommon.Net",
+      "ColorIndex": 4
+    },
+    "9ce794aa-0bfd-4369-944c-96daaabc9ea0": {
+      "ProjectGuid": "9ce794aa-0bfd-4369-944c-96daaabc9ea0",
+      "DisplayName": "BluetoothCommon.Net",
+      "ColorIndex": 5
+    },
+    "c223424b-c9af-42ba-960f-30f6e69be0fd": {
+      "ProjectGuid": "c223424b-c9af-42ba-960f-30f6e69be0fd",
+      "DisplayName": "Ethernet.Common.Net",
+      "ColorIndex": 6
+    },
+    "f3c6bcdb-ee21-4669-b6c9-573e9c88d182": {
+      "ProjectGuid": "f3c6bcdb-ee21-4669-b6c9-573e9c88d182",
+      "DisplayName": "CommunicationStack.Net",
+      "ColorIndex": 7
     }
   },
-  "NextColorIndex": 4
+  "NextColorIndex": 8
 }
