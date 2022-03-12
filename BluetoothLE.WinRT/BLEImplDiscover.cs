@@ -176,6 +176,7 @@ namespace Bluetooth.UWP.Core {
                             // but handy for updates in Windows
                             OSSpecificObj = deviceInfo,
                         };
+                        this.log.InfoExit("DevWatcher_Added");
                         this.DeviceDiscovered?.Invoke(sender, dev);
                     });
                 }

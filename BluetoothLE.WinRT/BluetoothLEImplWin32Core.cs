@@ -24,7 +24,7 @@ namespace Bluetooth.UWP.Core {
         private readonly BLE_CharcteristicsBinderSet binderSet = new();
         private readonly IDescParserFactory descParserfactory = new DescParserFactory();
         private readonly ICharParserFactory charParserFactory = new CharParserFactory();
-        private readonly ClassLog log = new("BluetoothLEImplWin32");
+        private readonly ClassLog log = new("BluetoothLEImplWin32Core");
 
         #endregion
 
