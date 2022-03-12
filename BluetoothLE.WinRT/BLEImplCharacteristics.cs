@@ -256,7 +256,9 @@ namespace Bluetooth.UWP.Core {
                             BLE_DisplayHelpers.GetCharacteristicName(ch), readResult.Status, BLE_DisplayHelpers.GetCharacteristicEnum(ch)));
                     }
                 }
-                else if (ch.CharacteristicProperties.HasFlag(GattCharacteristicProperties.Write)) {
+
+
+                if (ch.CharacteristicProperties.HasFlag(GattCharacteristicProperties.Write)) {
                     if (BLE_DisplayHelpers.GetCharacteristicName(ch) == "39319") {
                         try {
 

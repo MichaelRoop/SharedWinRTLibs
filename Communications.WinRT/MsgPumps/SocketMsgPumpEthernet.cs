@@ -10,8 +10,8 @@
 
         #region static members
 
-        private static CancellationTokenSource CANCEL_TOKEN = new CancellationTokenSource(1);
-        private static ManualResetEvent FINISH_READ_EVENT = new ManualResetEvent(false);
+        private static CancellationTokenSource CANCEL_TOKEN = new (1);
+        private static readonly ManualResetEvent FINISH_READ_EVENT = new (false);
 
         #endregion
 
